@@ -983,6 +983,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentHighScore = 0, leaderboards = {};
   let currentQuestion = null;
   let gameInProgress = false;
+  let usedQuestions = new Set(); // Track questions used in current game session
   
   // Load leaderboards
   if (typeof(Storage) !== "undefined" && localStorage) {
@@ -1508,6 +1509,9 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Name = player2NameInput.value.trim() || "Player 2";
     currentDifficulty = difficultySelect.value;
     
+    // Reset used questions for new game session
+    usedQuestions.clear();
+    
     lobbyDiv.classList.add('hidden');
     gameAreaDiv.style.display = 'block';
     setTheme(darkToggle.checked ? 'dark' : 'light');
@@ -1547,18 +1551,24 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHUD();
   }
 
-  // Enhanced question loading with API integration
+  // Enhanced question loading with API integration and duplicate prevention
   async function loadQuestion() {
     let selectedQuestion = null;
+    let availableQuestions = [];
     
     // Try API first if enabled
     if (useAPI) {
       try {
         const apiQuestions = await fetchAPIQuestions(currentDifficulty);
         if (apiQuestions.length > 0) {
-          // Mix API questions with local questions (70% API, 30% local for variety)
-          if (Math.random() < 0.7) {
-            selectedQuestion = apiQuestions[Math.floor(Math.random() * apiQuestions.length)];
+          // Filter out used API questions
+          const unusedAPIQuestions = apiQuestions.filter(q => 
+            !usedQuestions.has(q.question)
+          );
+          
+          if (unusedAPIQuestions.length > 0 && Math.random() < 0.7) {
+            availableQuestions = unusedAPIQuestions;
+            selectedQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
             console.log('📡 Using API question:', selectedQuestion.question);
           }
         }
@@ -1570,12 +1580,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fallback to local questions if API failed or not selected
     if (!selectedQuestion) {
       const localQuestions = triviaQuestions[currentDifficulty];
-      selectedQuestion = localQuestions[Math.floor(Math.random() * localQuestions.length)];
+      
+      // Filter out used local questions
+      const unusedLocalQuestions = localQuestions.filter(q => 
+        !usedQuestions.has(q.question)
+      );
+      
+      // If all questions have been used, reset and start over
+      if (unusedLocalQuestions.length === 0) {
+        console.log('🔄 All questions used, resetting question pool');
+        usedQuestions.clear();
+        // Re-filter after reset
+        const resetQuestions = localQuestions.filter(q => 
+          !usedQuestions.has(q.question)
+        );
+        selectedQuestion = resetQuestions[Math.floor(Math.random() * resetQuestions.length)];
+        showFade('🔄 Question Pool Reset!');
+      } else {
+        selectedQuestion = unusedLocalQuestions[Math.floor(Math.random() * unusedLocalQuestions.length)];
+      }
+      
       selectedQuestion.source = 'Local';
       console.log('💾 Using local question:', selectedQuestion.question);
     }
     
+    // Mark this question as used
+    usedQuestions.add(selectedQuestion.question);
     currentQuestion = selectedQuestion;
+    
+    console.log(`📝 Questions used in this session: ${usedQuestions.size}`);
     
     // Don't show category until after guess (mystery mode)
     questionCategory.textContent = "MYSTERY";
@@ -1940,6 +1973,18 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🗑️ API cache cleared');
     showFade('🗑️ API Cache Cleared');
   };
+  
+  window.resetQuestions = function() {
+    usedQuestions.clear();
+    console.log('🔄 Used questions cleared');
+    showFade('🔄 Question Pool Reset');
+  };
+  
+  window.showUsedQuestions = function() {
+    console.log(`📊 Questions used this session: ${usedQuestions.size}`);
+    console.log('📝 Used questions:', [...usedQuestions]);
+    showFade(`📊 ${usedQuestions.size} Questions Used`);
+  };
 
   function endTwoPlayerGame() {
     gameInProgress = false;
@@ -2072,8 +2117,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalQuestions = Object.values(triviaQuestions).reduce((total, difficulty) => total + difficulty.length, 0);
   console.log(`🎮 NES Hi-Lo Trivia Game - Enhanced Edition with EXACT MATCH BONUS!`);
   console.log(`🎯 NEW FEATURE: +50 bonus points when your high or low guess exactly matches the answer!`);
+  console.log(`🚫 DUPLICATE PREVENTION: No repeated questions within the same game session!`);
   console.log(`📊 Local Question Bank: ${totalQuestions} questions (Easy: ${triviaQuestions.easy.length}, Medium: ${triviaQuestions.medium.length}, Hard: ${triviaQuestions.hard.length})`);
   console.log(`📡 API Integration: Open Trivia Database (with ${totalQuestions}-question local fallback)`);
+  console.log(`🛠️ Debug Commands: toggleAPI(), clearAPICache(), resetQuestions(), showUsedQuestions()`);
 });
 </script>
 </body>
