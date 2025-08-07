@@ -1,92 +1,1868 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Enhanced PWA Manifest for True App Experience -->
+  <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22NES%20Hi-Lo%20Trivia%22%2C%22short_name%22%3A%22NES%20Hi-Lo%22%2C%22description%22%3A%22Retro%208-bit%20style%20hi-lo%20trivia%20game%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22fullscreen%22%2C%22background_color%22%3A%22%23667eea%22%2C%22theme_color%22%3A%22%23667eea%22%2C%22orientation%22%3A%22portrait%22%2C%22scope%22%3A%22.%2F%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520192%2520192%2527%253E%253Crect%2520width%253D%2527192%2527%2520height%253D%2527192%2527%2520fill%253D%2527%2523667eea%2527%252F%253E%253Crect%2520x%253D%252720%2527%2520y%253D%252720%2527%2520width%253D%2527152%2527%2520height%253D%2527152%2527%2520fill%253D%2527%2523FFD700%2527%2520stroke%253D%2527%2523333%2527%2520stroke-width%253D%25274%2527%252F%253E%253Ctext%2520x%253D%252796%2527%2520y%253D%252760%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252720%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253EHi%253C%252Ftext%253E%253Ctext%2520x%253D%252796%2527%2520y%253D%2527110%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252720%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253ELo%253C%252Ftext%253E%253Ctext%2520x%253D%252796%2527%2520y%253D%2527150%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252712%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253ETrivia%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520512%2520512%2527%253E%253Crect%2520width%253D%2527512%2527%2520height%253D%2527512%2527%2520fill%253D%2527%2523667eea%2527%252F%253E%253Crect%2520x%253D%252750%2527%2520y%253D%252750%2527%2520width%253D%2527412%2527%2520height%253D%2527412%2527%2520fill%253D%2527%2523FFD700%2527%2520stroke%253D%2527%2523333%2527%2520stroke-width%253D%252710%2527%252F%253E%253Ctext%2520x%253D%2527256%2527%2520y%253D%2527180%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252760%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253EHi%253C%252Ftext%253E%253Ctext%2520x%253D%2527256%2527%2520y%253D%2527280%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252760%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253ELo%253C%252Ftext%253E%253Ctext%2520x%253D%2527256%2527%2520y%253D%2527380%2527%2520font-family%253D%2527monospace%2527%2520font-size%253D%252730%2527%2520fill%253D%2527%2523333%2527%2520text-anchor%253D%2527middle%2527%253ETrivia%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%2C%22categories%22%3A%5B%22games%22%2C%22entertainment%22%5D%2C%22lang%22%3A%22en%22%7D">
+  <meta name="theme-color" content="#667eea">
+  <meta name="background-color" content="#667eea">
+  
+  <!-- App Icon Links for better compatibility -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%23667eea'/%3E%3Crect x='20' y='20' width='152' height='152' fill='%23FFD700' stroke='%23333' stroke-width='4'/%3E%3Ctext x='96' y='60' font-family='monospace' font-size='20' fill='%23333' text-anchor='middle'%3EHi%3C/text%3E%3Ctext x='96' y='110' font-family='monospace' font-size='20' fill='%23333' text-anchor='middle'%3ELo%3C/text%3E%3Ctext x='96' y='150' font-family='monospace' font-size='12' fill='%23333' text-anchor='middle'%3ETrivia%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%23667eea'/%3E%3Crect x='20' y='20' width='152' height='152' fill='%23FFD700' stroke='%23333' stroke-width='4'/%3E%3Ctext x='96' y='60' font-family='monospace' font-size='20' fill='%23333' text-anchor='middle'%3EHi%3C/text%3E%3Ctext x='96' y='110' font-family='monospace' font-size='20' fill='%23333' text-anchor='middle'%3ELo%3C/text%3E%3Ctext x='96' y='150' font-family='monospace' font-size='12' fill='%23333' text-anchor='middle'%3ETrivia%3C/text%3E%3C/svg%3E">
+  
+  <!-- Enhanced PWA Meta Tags for Native App Feel -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NES Hi-Lo Trivia">
+  <meta name="application-name" content="NES Hi-Lo Trivia">
+  <meta name="msapplication-TileColor" content="#667eea">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="full-screen" content="yes">
+  <meta name="browsermode" content="application">
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hi-Low Trivia Game</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <title>🎮 NES Hi-Lo Trivia 🎮</title>
+  <style>
+    /* PWA Fullscreen App Styles */
+    @media all and (display-mode: fullscreen),
+           all and (display-mode: standalone),
+           all and (display-mode: minimal-ui) {
+      body {
+        padding-top: env(safe-area-inset-top);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+        overflow-x: hidden;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+      }
+    }
+    
+    /* App-like behavior for installed PWA */
+    @media (display-mode: standalone) {
+      body {
+        background-attachment: fixed;
+        overscroll-behavior: none;
+        -webkit-overscroll-behavior: none;
+      }
+    }
+    
+    body { 
+      font-family: monospace, 'Courier New', Courier; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: #fff; 
+      margin: 0; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      transition: background 0.4s, color 0.4s; 
+      touch-action: manipulation; 
+      -webkit-touch-callout: none; 
+      -webkit-user-select: none; 
+      user-select: none; 
+      overscroll-behavior: none; 
+      -webkit-overscroll-behavior: none; 
+    }
+    
+    .container { 
+      max-width: 480px; 
+      margin: 0 auto; 
+      background: rgba(0,0,0,0.4); 
+      border-radius: 16px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 -20px 40px rgba(0,0,0,0.3); 
+      padding: 32px 18px 24px 18px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+    }
+    
+    .title { 
+      font-size: 24px; 
+      color: #00ff88; 
+      margin-bottom: 10px; 
+      font-weight: bold; 
+      text-shadow: 2px 2px 0px #000; 
+      letter-spacing: 1px; 
+      text-align: center; 
+    }
+    
+    .toggles { 
+      display: flex; 
+      justify-content: center; 
+      gap: 24px; 
+      margin-bottom: 18px; 
+    }
+    
+    .switch { 
+      position:relative; 
+      display:inline-block; 
+      width:50px; 
+      height:24px; 
+    }
+    
+    .switch input{display:none;}
+    
+    .slider { 
+      position:absolute; 
+      top:0; 
+      left:0; 
+      right:0; 
+      bottom:0; 
+      background:#ccc; 
+      border-radius:34px; 
+      transition:.4s; 
+      cursor: pointer; 
+    }
+    
+    .slider:before { 
+      content:""; 
+      position:absolute; 
+      width:18px; 
+      height:18px; 
+      left:3px; 
+      bottom:3px; 
+      background:white; 
+      border-radius:50%; 
+      transition:.4s; 
+    }
+    
+    input:checked+.slider { background:#00ff88; }
+    input:checked+.slider:before { transform:translateX(26px); }
+    
+    .settings-label { 
+      font-size: 14px; 
+      color: #FFD700; 
+      margin-bottom: 10px; 
+      font-weight: bold; 
+      letter-spacing: 1px; 
+      text-align: center; 
+    }
+    
+    .lobby-form { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 14px; 
+      width: 100%; 
+      align-items: center; 
+    }
+    
+    .lobby-form input, .lobby-form select { 
+      font-size: 16px; 
+      padding: 7px; 
+      border-radius: 8px; 
+      border: none; 
+      background: #f8f9fa; 
+      color: #222; 
+      width: 80%; 
+      max-width: 260px; 
+      margin: 0 auto; 
+      box-sizing: border-box; 
+    }
+    
+    .lobby-form label { 
+      font-size: 13px; 
+      color: #fff; 
+      margin-bottom: 2px; 
+      text-align: left; 
+      width: 80%; 
+      max-width: 260px; 
+    }
+    
+    .mode-buttons { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px; 
+      margin-top: 10px; 
+      width: 100%; 
+      align-items: center; 
+    }
+    
+    .mode-button { 
+      font-size: 16px; 
+      padding: 12px 20px; 
+      border: none; 
+      border-radius: 8px; 
+      background: #00ff88; 
+      color: #333; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: background 0.2s; 
+      width: 80%; 
+      max-width: 260px; 
+    }
+    
+    .mode-button:hover { background: #00cc6a; }
+    
+    .two-player-options { 
+      display: none; 
+      flex-direction: column; 
+      gap: 8px; 
+      width: 100%; 
+      align-items: center; 
+      margin-top: 10px; 
+    }
+    
+    .two-player-options.show { 
+      display: flex; 
+    }
+    
+    .hidden { display: none !important; }
+    
+    #player2-section { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      width: 100%; 
+    }
+    
+    #player2-section label, #player2-section input { 
+      width: 80%; 
+      max-width: 260px; 
+    }
+    
+    #back-to-one { 
+      margin-top: 8px; 
+      background: #00ff88; 
+      color: #222; 
+      border: none; 
+      border-radius: 8px; 
+      padding: 8px 12px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      font-size: 14px; 
+      width: 80%; 
+      max-width: 260px; 
+    }
+    
+    #back-to-one:hover { background: #00cc6a; }
+    
+    .music-controls { 
+      display: flex; 
+      gap: 8px; 
+      margin: 15px auto 18px auto; 
+      justify-content: center; 
+      padding: 10px; 
+      background: rgba(0,0,0,0.3); 
+      border-radius: 12px; 
+      border: 2px solid #FFD700; 
+      box-shadow: 2px 2px 0px #333; 
+      width: fit-content; 
+    }
+    
+    .music-controls button { 
+      font-family: monospace, 'Courier New', Courier; 
+      font-size: 14px; 
+      padding: 8px 12px; 
+      border: none; 
+      border-radius: 8px; 
+      background: #00ff88; 
+      color: #222; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: background 0.2s, transform 0.1s; 
+      box-shadow: 2px 2px 0px #000; 
+    }
+    
+    .music-controls button:hover { 
+      background: #00cc6a; 
+      transform: translateY(-1px); 
+    }
+    
+    .music-controls button:active { 
+      transform: translateY(0); 
+    }
+    
+    #game-area { 
+      display: none; 
+      width: 100%; 
+      max-width: 600px; 
+      margin: 20px auto; 
+      padding: 20px; 
+      background: rgba(0,0,0,0.4); 
+      border-radius: 16px; 
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); 
+      text-align: center; 
+      position: relative; 
+    }
+    
+    #hud { 
+      margin: 10px; 
+      font-size: 12px; 
+      color: #FFD700; 
+      background: rgba(0,0,0,0.4); 
+      padding: 6px 12px; 
+      border-radius: 8px; 
+      border: 2px solid #FFD700; 
+      box-shadow: 2px 2px 0px #333; 
+      display: inline-block; 
+    }
+    
+    .question-area { 
+      background: rgba(0,0,0,0.5); 
+      border: 2px solid #FFD700; 
+      border-radius: 12px; 
+      padding: 20px; 
+      margin: 20px auto; 
+      box-shadow: 3px 3px 0px #000; 
+      max-width: 500px; 
+    }
+    
+    .question-category { 
+      font-size: 14px; 
+      color: #FFD700; 
+      margin-bottom: 10px; 
+      font-weight: bold; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      opacity: 0; 
+      transition: opacity 0.3s; 
+    }
+    
+    .question-category.revealed { 
+      opacity: 1; 
+    }
+    
+    .question-text { 
+      font-size: 18px; 
+      color: #fff; 
+      margin-bottom: 20px; 
+      line-height: 1.4; 
+      font-weight: bold; 
+    }
+    
+    .difficulty-indicator { 
+      font-size: 12px; 
+      color: #ff6b6b; 
+      margin-bottom: 15px; 
+      font-weight: bold; 
+    }
+    
+    .guess-inputs { 
+      display: flex; 
+      justify-content: center; 
+      gap: 15px; 
+      margin: 20px 0; 
+      align-items: center; 
+      flex-wrap: wrap; 
+    }
+    
+    .guess-group { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 5px; 
+    }
+    
+    .guess-label { 
+      font-size: 14px; 
+      color: #FFD700; 
+      font-weight: bold; 
+    }
+    
+    .guess-input { 
+      font-size: 18px; 
+      padding: 10px; 
+      border-radius: 8px; 
+      border: 2px solid #FFD700; 
+      background: #f8f9fa; 
+      color: #222; 
+      width: 100px; 
+      text-align: center; 
+      font-weight: bold; 
+      box-shadow: 2px 2px 0px #333; 
+    }
+    
+    .guess-input:focus { 
+      outline: none; 
+      border-color: #00ff88; 
+      box-shadow: 0 0 10px #00ff88; 
+    }
+    
+    .submit-guess { 
+      font-size: 18px; 
+      padding: 12px 24px; 
+      border: none; 
+      border-radius: 8px; 
+      background: #00ff88; 
+      color: #333; 
+      font-weight: bold; 
+      cursor: pointer; 
+      margin: 10px; 
+      transition: background 0.2s, transform 0.1s; 
+      box-shadow: 3px 3px 0px #000; 
+    }
+    
+    .submit-guess:hover { 
+      background: #00cc6a; 
+      transform: translateY(-2px); 
+    }
+    
+    .submit-guess:active { 
+      transform: translateY(0); 
+    }
+    
+    .submit-guess:disabled { 
+      background: #666; 
+      cursor: not-allowed; 
+      transform: none; 
+    }
+    
+    .result-area { 
+      background: rgba(0,0,0,0.6); 
+      border: 2px solid #FFD700; 
+      border-radius: 10px; 
+      padding: 15px; 
+      margin: 20px auto; 
+      max-width: 400px; 
+      box-shadow: 3px 3px 0px #000; 
+    }
+    
+    .result-text { 
+      font-size: 16px; 
+      margin-bottom: 10px; 
+      font-weight: bold; 
+    }
+    
+    .correct { color: #00ff88; }
+    .incorrect { color: #ff6b6b; }
+    .points { color: #FFD700; }
+    
+    .actual-answer { 
+      font-size: 20px; 
+      color: #FFD700; 
+      margin: 10px 0; 
+      font-weight: bold; 
+    }
+    
+    .combo-display { 
+      font-size: 18px; 
+      color: #ff6b6b; 
+      margin: 10px 0; 
+      font-weight: bold; 
+      text-shadow: 2px 2px 0px #000; 
+      animation: none; 
+    }
+    
+    .combo-display.combo-active { 
+      animation: comboGlow 1s ease-in-out infinite alternate; 
+    }
+    
+    @keyframes comboGlow {
+      from { 
+        color: #ff6b6b; 
+        text-shadow: 2px 2px 0px #000, 0 0 10px #ff6b6b; 
+      }
+      to { 
+        color: #ff9999; 
+        text-shadow: 2px 2px 0px #000, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b; 
+      }
+    }
+    
+    .head-to-head-area { 
+      display: none; 
+      background: rgba(0,0,0,0.6); 
+      border: 2px solid #FFD700; 
+      border-radius: 10px; 
+      padding: 15px; 
+      margin: 20px auto; 
+      max-width: 500px; 
+      box-shadow: 3px 3px 0px #000; 
+    }
+    
+    .head-to-head-area.show { 
+      display: block; 
+    }
+    
+    .player-inputs { 
+      display: flex; 
+      justify-content: space-between; 
+      gap: 20px; 
+      margin: 15px 0; 
+    }
+    
+    .player-section { 
+      flex: 1; 
+      text-align: center; 
+    }
+    
+    .player-name { 
+      font-size: 14px; 
+      color: #00ff88; 
+      font-weight: bold; 
+      margin-bottom: 10px; 
+    }
+    
+    .game-buttons { 
+      margin-top: 20px; 
+      display: flex; 
+      justify-content: center; 
+      gap: 10px; 
+      flex-wrap: wrap; 
+    }
+    
+    .game-buttons button { 
+      padding: 10px 15px; 
+      font-size: 14px; 
+      cursor: pointer; 
+      border-radius: 8px; 
+      border: none; 
+      background: #00ff88; 
+      color: #222; 
+      font-weight: bold; 
+      transition: background 0.2s, transform 0.1s; 
+      margin: 4px; 
+    }
+    
+    .game-buttons button:hover { 
+      background: #00cc6a; 
+      transform: translateY(-2px); 
+    }
+    
+    .game-buttons button:active { 
+      transform: translateY(0); 
+    }
+    
+    .fade-black { 
+      position: fixed; 
+      left: 0; 
+      top: 0; 
+      width: 100vw; 
+      height: 100vh; 
+      background: rgba(0,0,0,0.95); 
+      color: #FFD700; 
+      z-index: 9999; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 2rem; 
+      opacity: 0; 
+      pointer-events: none; 
+      transition: opacity 0.7s; 
+    }
+    
+    .fade-black.show { 
+      opacity: 1; 
+      pointer-events: all; 
+    }
+    
+    .player-turn-display { 
+      font-size: 18px; 
+      color: #00ff88; 
+      margin-bottom: 10px; 
+      font-weight: bold; 
+    }
+    
+    .high-score-display { 
+      font-size: 14px; 
+      color: #FFD700; 
+      margin-top: 5px; 
+    }
+    
+    .combo-hud { 
+      font-size: 16px; 
+      color: #ff6b6b; 
+      margin: 5px 0; 
+      font-weight: bold; 
+    }
+    
+    .leaderboard { 
+      text-align: center; 
+      margin-top: 18px; 
+    }
+    
+    .leaderboard-title { 
+      font-size: 14px; 
+      font-weight: bold; 
+      margin-bottom: 10px; 
+      color: #FFD700; 
+      border-bottom: 2px solid #FFD700; 
+      display: inline-block; 
+      padding-bottom: 4px; 
+      letter-spacing: 1px; 
+    }
+    
+    .tabs { 
+      display: flex; 
+      justify-content: center; 
+      margin-bottom: 10px; 
+      gap: 8px; 
+    }
+    
+    .tab { 
+      padding: 6px 12px; 
+      cursor: pointer; 
+      border-bottom: 3px solid transparent; 
+      color: #fff; 
+      font-weight: normal; 
+      border-radius: 4px 4px 0 0; 
+      background: none; 
+      transition: color 0.2s; 
+      font-size: 12px; 
+    }
+    
+    .tab.active { 
+      border-color: #FFD700; 
+      font-weight: bold; 
+      color: #FFD700; 
+      background: rgba(255,255,255,0.05); 
+    }
+    
+    .leaderboard ul { 
+      list-style: none; 
+      padding: 0; 
+      margin: 0; 
+    }
+    
+    .leaderboard li { 
+      margin: 5px 0; 
+      font-size: 12px; 
+      color: #fff; 
+      font-weight: normal; 
+    }
+
+    /* Light mode styles */
+    body.light-mode { 
+      background: linear-gradient(135deg, #f8f9fa 0%, #e2e8f0 100%); 
+      color: #495057; 
+    }
+    
+    .container.light-mode, #game-area.light-mode { 
+      background: rgba(255,255,255,0.9); 
+      color: #495057; 
+    }
+    
+    .settings-label.light-mode { color: #495057; }
+    .title.light-mode { color: #00ff88; text-shadow: 2px 2px 0px #fff; }
+    .lobby-form input.light-mode, .lobby-form select.light-mode { background: #fff; color: #495057; border: 1px solid #adb5bd; }
+    .lobby-form label.light-mode { color: #495057; }
+    #hud.light-mode { color: #495057; border-color: #495057; background: rgba(255,255,255,0.8); box-shadow: 2px 2px 0px #adb5bd; }
+    .question-area.light-mode { background: rgba(255,255,255,0.9); border-color: #495057; box-shadow: 3px 3px 0px #adb5bd; }
+    .question-category.light-mode { color: #495057; }
+    .question-text.light-mode { color: #495057; }
+    .difficulty-indicator.light-mode { color: #ff6b6b; }
+    .guess-label.light-mode { color: #495057; }
+    .guess-input.light-mode { border-color: #495057; }
+    .guess-input.light-mode:focus { border-color: #00ff88; }
+    .result-area.light-mode { background: rgba(255,255,255,0.9); border-color: #495057; box-shadow: 3px 3px 0px #adb5bd; }
+    .head-to-head-area.light-mode { background: rgba(255,255,255,0.9); border-color: #495057; box-shadow: 3px 3px 0px #adb5bd; }
+    .player-name.light-mode { color: #00ff88; }
+    .player-turn-display.light-mode { color: #00ff88; }
+    .high-score-display.light-mode { color: #495057; }
+    .combo-hud.light-mode { color: #ff6b6b; }
+    .combo-display.light-mode { color: #ff6b6b; }
+    .leaderboard-title.light-mode { color: #495057; border-color: #495057; }
+    .tab.light-mode { color: #495057; }
+    .tab.active.light-mode { border-color: #FFD700; color: #FFD700; background: rgba(0,0,0,0.05); }
+    .leaderboard li.light-mode { color: #495057; }
+    .toggles label.light-mode { color: #495057; }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .container { 
+        margin: 10px; 
+        padding: 18px 15px 12px 15px; 
+        width: calc(100% - 20px); 
+        max-width: none; 
+      }
+      
+      .title { font-size: 18px; }
+      .toggles { gap: 15px; margin-bottom: 15px; }
+      .toggles label { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+      .music-controls { 
+        justify-content: center; 
+        margin: 10px auto 15px auto; 
+        gap: 8px; 
+        padding: 8px; 
+      }
+      .music-controls button { 
+        font-size: 12px; 
+        padding: 8px 10px; 
+      }
+      .mode-buttons { gap: 8px; }
+      .mode-button { font-size: 14px; }
+      .leaderboard-title { font-size: 12px; }
+      .tab { font-size: 10px; padding: 6px 8px; }
+      .leaderboard li { font-size: 9px; }
+      
+      #game-area { 
+        margin: 10px; 
+        padding: 15px; 
+        width: calc(100% - 20px); 
+        max-width: none; 
+      }
+      
+      .question-text { font-size: 16px; }
+      .guess-inputs { flex-direction: column; gap: 10px; }
+      .player-inputs { flex-direction: column; gap: 15px; }
+      .game-buttons { flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+      .game-buttons button { padding: 8px 12px; font-size: 11px; flex: 1; min-width: 100px; }
+      #hud { font-size: 9px; padding: 6px 8px; word-break: break-word; }
+      .player-turn-display { font-size: 14px; }
+      .high-score-display { font-size: 11px; }
+      .combo-hud { font-size: 13px; }
+      .combo-display { font-size: 15px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container" id="lobby">
-    <div class="title" id="title">🎮 Hi-Low Trivia 🎮</div>
-
-    <div class="toggles">
-      <label>🌙 Dark
-        <label class="switch"><input type="checkbox" id="darkToggle" checked><span class="slider"></span></label>
+<div class="container" id="lobby">
+  <div class="title" id="title">🎮 NES Hi-Lo Trivia 🎮</div>
+  <div class="toggles">
+    <label>🌙 Dark
+      <label class="switch">
+        <input type="checkbox" id="darkToggle" checked>
+        <span class="slider"></span>
       </label>
-      <label>🔊 Sound
-        <label class="switch"><input type="checkbox" id="soundToggle"><span class="slider"></span></label>
+    </label>
+    <label>🔊 Sound
+      <label class="switch">
+        <input type="checkbox" id="soundToggle">
+        <span class="slider"></span>
       </label>
-    </div>
-
-    <div class="music-controls">
-      <button id="prev-track">⏮ Prev</button>
-      <button id="next-track">Next ⏭</button>
-    </div>
-
-    <div class="lobby-form">
-      <label for="difficulty">🧠 Select Difficulty</label>
-      <select id="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-      </select>
-
-      <button class="mode-button" id="start-1p">▶️ Start 1 Player</button>
-      <button class="mode-button" id="start-2p">🎮 Start 2 Player</button>
-      <button class="mode-button hidden" id="back-to-one">🔙 Back to 1 Player</button>
-    </div>
+    </label>
+  </div>
+  <div class="settings-label" style="margin-bottom: 5px; font-size: 12px;">🎵 MUSIC CONTROLS</div>
+  <div class="music-controls">
+    <button id="beeps-only">🎵 Beeps Only</button>
+    <button id="prev-track">⏮ Prev</button>
+    <button id="next-track">Next ⏭</button>
   </div>
 
-  <div id="game-area" class="hidden">
-    <div id="hud">
-      <div id="current-player"></div>
-      <div id="streak-counter"></div>
+  <!-- YouTube Music Embed (hidden by default) -->
+  <div id="music-player" style="width:0;height:0;overflow:hidden;">
+    <iframe id="yt-music" width="0" height="0" frameborder="0" allow="autoplay; encrypted-media" src=""></iframe>
+  </div>
+
+  <div class="settings-label" id="settings-label">SETTINGS</div>
+  
+  <form class="lobby-form" id="lobby-form" onsubmit="return false;">
+    <label for="player1-name">Player 1 Name:</label>
+    <input type="text" id="player1-name" placeholder="Player 1" required />
+    <div id="player2-section" class="hidden">
+      <label for="player2-name">Player 2 Name:</label>
+      <input type="text" id="player2-name" placeholder="Player 2" />
+      <button type="button" id="back-to-one">Back to Single Player</button>
     </div>
-
-    <div id="question-box">
-      <p id="trivia-question">Loading question...</p>
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty">
+      <option value="easy">Easy - Wide Ranges & Simple Questions</option>
+      <option value="medium" selected>Medium - Moderate Challenge</option>
+      <option value="hard">Hard - Precision Required</option>
+    </select>
+    <div class="mode-buttons">
+      <button class="mode-button" id="start-single">🎯 Single Player</button>
+      <button class="mode-button" id="start-two">👥 Two Player</button>
     </div>
-
-    <div class="input-section">
-      <label>Enter Your Guess Range:</label>
-      <input type="number" id="low-guess" placeholder="Low" />
-      <input type="number" id="high-guess" placeholder="High" />
-      <button id="submit-guess">Submit</button>
+    <div class="two-player-options" id="two-player-options">
+      <button class="mode-button" id="start-head-to-head">⚡ Head-to-Head</button>
+      <button class="mode-button" id="start-turn-based">🔄 Turn-Based</button>
     </div>
-
-    <div id="feedback"></div>
-
-    <div class="game-buttons">
-      <button id="next-question">Next Question</button>
-      <button id="reset-game">Reset Game</button>
+  </form>
+  <div class="leaderboard">
+    <div class="leaderboard-title">Leaderboard</div>
+    <div class="tabs">
+      <div class="tab" onclick="switchTab('easy')">Easy</div>
+      <div class="tab active" onclick="switchTab('medium')">Medium</div>
+      <div class="tab" onclick="switchTab('hard')">Hard</div>
     </div>
+    <ul id="leaderboard-list"></ul>
+  </div>
+</div>
 
-    <div class="leaderboard">
-      <div class="leaderboard-title">🏆 Leaderboard</div>
-      <div class="tabs">
-        <div class="tab active" data-tab="all-time">All Time</div>
-        <div class="tab" data-tab="daily">Today</div>
+<div id="game-area">
+  <div class="player-turn-display" id="player-turn-display"></div>
+  <div id="hud">Score: 0 | Round: 1 | Combo: 0x</div>
+  <div class="high-score-display" id="high-score-display">High Score: 0</div>
+  <div class="combo-hud" id="combo-hud"></div>
+  
+  <div class="question-area">
+    <div class="difficulty-indicator" id="difficulty-indicator">MEDIUM DIFFICULTY</div>
+    <div class="question-category" id="question-category">MYSTERY</div>
+    <div class="question-text" id="question-text">Loading question...</div>
+    
+    <div class="guess-inputs" id="single-inputs">
+      <div class="guess-group">
+        <div class="guess-label">LOW</div>
+        <input type="number" class="guess-input" id="low-guess" placeholder="0">
       </div>
-      <ul id="leaderboard-list">
-        <!-- Leaderboard entries here -->
-      </ul>
+      <div class="guess-group">
+        <div class="guess-label">HIGH</div>
+        <input type="number" class="guess-input" id="high-guess" placeholder="100">
+      </div>
     </div>
+    
+    <button class="submit-guess" id="submit-guess" onclick="submitGuess()">Submit Guess</button>
   </div>
+  
+  <!-- Head-to-Head Input Area -->
+  <div class="head-to-head-area" id="head-to-head-area">
+    <div class="player-inputs">
+      <div class="player-section">
+        <div class="player-name" id="player1-display">Player 1</div>
+        <div class="guess-group">
+          <div class="guess-label">LOW</div>
+          <input type="number" class="guess-input" id="p1-low-guess" placeholder="0">
+        </div>
+        <div class="guess-group">
+          <div class="guess-label">HIGH</div>
+          <input type="number" class="guess-input" id="p1-high-guess" placeholder="100">
+        </div>
+      </div>
+      <div class="player-section">
+        <div class="player-name" id="player2-display">Player 2</div>
+        <div class="guess-group">
+          <div class="guess-label">LOW</div>
+          <input type="number" class="guess-input" id="p2-low-guess" placeholder="0">
+        </div>
+        <div class="guess-group">
+          <div class="guess-label">HIGH</div>
+          <input type="number" class="guess-input" id="p2-high-guess" placeholder="100">
+        </div>
+      </div>
+    </div>
+    <button class="submit-guess" id="submit-head-to-head" onclick="submitHeadToHead()">Both Players Submit!</button>
+  </div>
+  
+  <div class="result-area hidden" id="result-area">
+    <div class="result-text" id="result-text"></div>
+    <div class="actual-answer" id="actual-answer"></div>
+    <div class="points" id="points-earned"></div>
+    <div class="combo-display" id="combo-display"></div>
+  </div>
+  
+  <div class="game-buttons">
+    <button onclick="nextQuestion()">Next Question</button>
+    <button onclick="skipQuestion()">Skip Question</button>
+    <button onclick="backToLobby()">🏠 Back to Lobby</button>
+  </div>
+</div>
 
-  <iframe
-    id="ytMusicIframe"
-    width="0"
-    height="0"
-    frameborder="0"
-    allow="autoplay"
-    src="https://www.youtube.com/embed/videoseries?list=PLo1KWwpO1Dle_v5TRFbZl_P_M3ooUBxe2&enablejsapi=1"
-    style="display: none;"
-  ></iframe>
+<div class="fade-black" id="fade-black"></div>
+<audio id="win-sound" preload="auto"></audio>
+<audio id="lose-sound" preload="auto"></audio>
 
-  <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Music playlist (same as crossword game for consistency)
+  const playlist = [
+    "fs0BCIUQ7Ws", "VpqoE7ft284", "TfEZaH_BBLY", 
+    "V6SJzeegnck", "pzkAKQJv19A", "CIWo9e1Qzos", "WvzVYC507gU"
+  ];
+  let currentTrackIndex = 0;
+  let musicStarted = false;
+  let musicInitialized = false;
+
+  // Game state variables
+  let player1Name = '', player2Name = '', currentDifficulty = 'medium';
+  let gameMode = 'single'; // 'single', 'head-to-head', 'turn-based'
+  let currentPlayer = 1;
+  let player1Score = 0, player2Score = 0;
+  let currentRound = 1, maxRounds = 10;
+  let currentCombo = 0, maxCombo = 0;
+  let currentHighScore = 0, leaderboards = {};
+  let currentQuestion = null;
+  let gameInProgress = false;
+  
+  // Load leaderboards
+  if (typeof(Storage) !== "undefined" && localStorage) {
+    leaderboards = JSON.parse(localStorage.getItem('hiloLeaderboards') || '{}');
+  }
+  if (!leaderboards.easy) leaderboards.easy = [];
+  if (!leaderboards.medium) leaderboards.medium = [];
+  if (!leaderboards.hard) leaderboards.hard = [];
+  let currentLeaderboardTab = 'medium';
+
+  // UI Elements
+  const lobbyDiv = document.getElementById('lobby');
+  const gameAreaDiv = document.getElementById('game-area');
+  const player1NameInput = document.getElementById('player1-name');
+  const player2NameInput = document.getElementById('player2-name');
+  const difficultySelect = document.getElementById('difficulty');
+  const player2Section = document.getElementById('player2-section');
+  const backToOneButton = document.getElementById('back-to-one');
+  const twoPlayerOptions = document.getElementById('two-player-options');
+  const hudDisplay = document.getElementById('hud');
+  const highScoreDisplay = document.getElementById('high-score-display');
+  const playerTurnDisplay = document.getElementById('player-turn-display');
+  const comboHud = document.getElementById('combo-hud');
+  const darkToggle = document.getElementById('darkToggle');
+  const soundToggle = document.getElementById('soundToggle');
+  const winSound = document.getElementById('win-sound');
+  const loseSound = document.getElementById('lose-sound');
+
+  // Question elements
+  const difficultyIndicator = document.getElementById('difficulty-indicator');
+  const questionCategory = document.getElementById('question-category');
+  const questionText = document.getElementById('question-text');
+  const singleInputs = document.getElementById('single-inputs');
+  const headToHeadArea = document.getElementById('head-to-head-area');
+  const lowGuessInput = document.getElementById('low-guess');
+  const highGuessInput = document.getElementById('high-guess');
+  const submitButton = document.getElementById('submit-guess');
+  const submitHeadToHeadButton = document.getElementById('submit-head-to-head');
+  const resultArea = document.getElementById('result-area');
+  const resultText = document.getElementById('result-text');
+  const actualAnswer = document.getElementById('actual-answer');
+  const pointsEarned = document.getElementById('points-earned');
+  const comboDisplay = document.getElementById('combo-display');
+
+  // Comprehensive Trivia Questions Database (150+ questions - ALL NUMERIC ANSWERS)
+  const triviaQuestions = {
+    easy: [
+      // Movies & Entertainment (20 questions)
+      { question: "How many main characters are in the movie 'Toy Story'?", answer: 2, category: "Movies" },
+      { question: "How many Harry Potter movies are there in the main series?", answer: 8, category: "Movies" },
+      { question: "How many Disney princess movies were released in the 1990s?", answer: 3, category: "Movies" },
+      { question: "How many minutes long is the average Disney animated movie?", answer: 90, category: "Movies" },
+      { question: "How many 'Lord of the Rings' movies are in the original trilogy?", answer: 3, category: "Movies" },
+      { question: "How many 'Star Wars' movies were in the original trilogy?", answer: 3, category: "Movies" },
+      { question: "How many seasons did the TV show 'Friends' run for?", answer: 10, category: "TV" },
+      { question: "How many dwarfs were there in Snow White?", answer: 7, category: "Movies" },
+      { question: "How many 'Shrek' movies are there?", answer: 4, category: "Movies" },
+      { question: "How many 'Indiana Jones' movies were in the original series?", answer: 3, category: "Movies" },
+      { question: "How many seasons did 'The Simpsons' run in its first decade?", answer: 10, category: "TV" },
+      { question: "How many 'Jurassic Park' movies were made in the 1990s and 2000s?", answer: 3, category: "Movies" },
+      { question: "How many main characters are in 'The Wizard of Oz'?", answer: 4, category: "Movies" },
+      { question: "How many hours long is the movie 'Titanic' (rounded)?", answer: 3, category: "Movies" },
+      { question: "How many 'Home Alone' movies starred Macaulay Culkin?", answer: 2, category: "Movies" },
+      { question: "How many seasons did 'Cheers' run for?", answer: 11, category: "TV" },
+      { question: "How many 'Rocky' movies starred Sylvester Stallone?", answer: 6, category: "Movies" },
+      { question: "How many 'Pirates of the Caribbean' movies are there?", answer: 5, category: "Movies" },
+      { question: "How many main characters are in 'Sesame Street' (Big Bird, Elmo, Cookie Monster, Oscar)?", answer: 4, category: "TV" },
+      { question: "How many minutes long is a typical TV sitcom episode?", answer: 22, category: "TV" },
+      
+      // History & Geography (15 questions)
+      { question: "How many states are in the United States?", answer: 50, category: "Geography" },
+      { question: "How many continents are there?", answer: 7, category: "Geography" },
+      { question: "How many years did World War II last?", answer: 6, category: "History" },
+      { question: "How many original colonies were there in America?", answer: 13, category: "History" },
+      { question: "How many Great Lakes are there?", answer: 5, category: "Geography" },
+      { question: "How many time zones are in the continental United States?", answer: 4, category: "Geography" },
+      { question: "How many years did the American Civil War last?", answer: 4, category: "History" },
+      { question: "How many presidents have been assassinated in U.S. history?", answer: 4, category: "History" },
+      { question: "How many provinces are in Canada?", answer: 10, category: "Geography" },
+      { question: "How many years did World War I last?", answer: 4, category: "History" },
+      { question: "How many oceans are there on Earth?", answer: 5, category: "Geography" },
+      { question: "How many territories does the United States have?", answer: 5, category: "Geography" },
+      { question: "How many years did the Vietnam War last (U.S. involvement)?", answer: 20, category: "History" },
+      { question: "How many countries are in North America?", answer: 3, category: "Geography" },
+      { question: "How many amendments are in the U.S. Bill of Rights?", answer: 10, category: "History" },
+      
+      // Sports (15 questions)
+      { question: "How many players are on a basketball team on the court at once?", answer: 5, category: "Sports" },
+      { question: "How many innings are in a standard baseball game?", answer: 9, category: "Sports" },
+      { question: "How many points is a touchdown worth in American football?", answer: 6, category: "Sports" },
+      { question: "How many holes are on a standard golf course?", answer: 18, category: "Sports" },
+      { question: "How many players are on a soccer team on the field at once?", answer: 11, category: "Sports" },
+      { question: "How many strikes make an out in baseball?", answer: 3, category: "Sports" },
+      { question: "How many quarters are in an NBA basketball game?", answer: 4, category: "Sports" },
+      { question: "How many yards is a football field (including end zones)?", answer: 120, category: "Sports" },
+      { question: "How many points is a field goal worth in American football?", answer: 3, category: "Sports" },
+      { question: "How many players are on a volleyball team on the court?", answer: 6, category: "Sports" },
+      { question: "How many bases are there in baseball?", answer: 4, category: "Sports" },
+      { question: "How many rounds are in a typical boxing match?", answer: 12, category: "Sports" },
+      { question: "How many players are on an ice hockey team on the ice at once?", answer: 6, category: "Sports" },
+      { question: "How many games are in a tennis set (minimum to win)?", answer: 6, category: "Sports" },
+      { question: "How many pins are there in bowling?", answer: 10, category: "Sports" },
+      
+      // Animals & Science (10 questions)
+      { question: "How many legs does a spider have?", answer: 8, category: "Animals" },
+      { question: "How many chambers does a human heart have?", answer: 4, category: "Science" },
+      { question: "How many days are in February during a leap year?", answer: 29, category: "Science" },
+      { question: "How many teeth do most adult humans have?", answer: 32, category: "Science" },
+      { question: "How many wings does a butterfly have?", answer: 4, category: "Animals" },
+      { question: "How many humps does a Bactrian camel have?", answer: 2, category: "Animals" },
+      { question: "How many eyes does a spider typically have?", answer: 8, category: "Animals" },
+      { question: "How many legs does an insect have?", answer: 6, category: "Animals" },
+      { question: "How many stomach compartments does a cow have?", answer: 4, category: "Animals" },
+      { question: "How many bones are in a human hand (including wrist)?", answer: 27, category: "Science" },
+      
+      // General Knowledge & Math (10 questions)
+      { question: "How many sides does a triangle have?", answer: 3, category: "Math" },
+      { question: "How many minutes are in one hour?", answer: 60, category: "Math" },
+      { question: "How many days are in a typical year?", answer: 365, category: "Math" },
+      { question: "How many letters are in the English alphabet?", answer: 26, category: "Language" },
+      { question: "How many months have 31 days?", answer: 7, category: "Math" },
+      { question: "How many strings does a standard guitar have?", answer: 6, category: "Music" },
+      { question: "How many colors are in a rainbow?", answer: 7, category: "Science" },
+      { question: "How many pieces are in a dozen?", answer: 12, category: "Math" },
+      { question: "How many hours are in a day?", answer: 24, category: "Math" },
+      { question: "How many weeks are in a year?", answer: 52, category: "Math" }
+    ],
+    
+    medium: [
+      // Movies & Entertainment (15 questions)
+      { question: "What year was the first Star Wars movie released?", answer: 1977, category: "Movies" },
+      { question: "How many Academy Awards did 'Titanic' win?", answer: 11, category: "Movies" },
+      { question: "What year was Netflix founded?", answer: 1997, category: "Technology" },
+      { question: "What year did the first iPhone come out?", answer: 2007, category: "Technology" },
+      { question: "How many seasons did 'The Office' (US) run for?", answer: 9, category: "TV" },
+      { question: "What year was YouTube founded?", answer: 2005, category: "Technology" },
+      { question: "How many 'Fast and Furious' movies are there (as of 2023)?", answer: 10, category: "Movies" },
+      { question: "What year was the first 'Jurassic Park' movie released?", answer: 1993, category: "Movies" },
+      { question: "How many Emmy Awards did 'Game of Thrones' win total?", answer: 59, category: "TV" },
+      { question: "What year was Disney founded?", answer: 1923, category: "Movies" },
+      { question: "How many seasons did 'Breaking Bad' run for?", answer: 5, category: "TV" },
+      { question: "What year was the first 'Superman' movie with Christopher Reeve released?", answer: 1978, category: "Movies" },
+      { question: "How many 'Mission: Impossible' movies are there (as of 2023)?", answer: 7, category: "Movies" },
+      { question: "What year was 'E.T.' released?", answer: 1982, category: "Movies" },
+      { question: "How many main characters are in 'The Big Bang Theory'?", answer: 7, category: "TV" },
+      
+      // History (15 questions)
+      { question: "What year did the Berlin Wall fall?", answer: 1989, category: "History" },
+      { question: "How old was John F. Kennedy when he became president?", answer: 43, category: "History" },
+      { question: "What year did World War I end?", answer: 1918, category: "History" },
+      { question: "How many years did the American Civil War last?", answer: 4, category: "History" },
+      { question: "What year did man first land on the moon?", answer: 1969, category: "History" },
+      { question: "What year was the Declaration of Independence signed?", answer: 1776, category: "History" },
+      { question: "How old was Martin Luther King Jr. when he was assassinated?", answer: 39, category: "History" },
+      { question: "What year did the United States enter World War II?", answer: 1941, category: "History" },
+      { question: "How many years did the Great Depression last?", answer: 10, category: "History" },
+      { question: "What year was the Constitution signed?", answer: 1787, category: "History" },
+      { question: "How old was Abraham Lincoln when he became president?", answer: 52, category: "History" },
+      { question: "What year did the Korean War end?", answer: 1953, category: "History" },
+      { question: "How many years did Prohibition last in the United States?", answer: 13, category: "History" },
+      { question: "What year was Alaska purchased by the United States?", answer: 1867, category: "History" },
+      { question: "How old was George Washington when he became president?", answer: 57, category: "History" },
+      
+      // Geography & Science (15 questions)
+      { question: "How many time zones are there in Russia?", answer: 11, category: "Geography" },
+      { question: "What is the average human body temperature in Fahrenheit?", answer: 98, category: "Science" },
+      { question: "How many bones are in the adult human body?", answer: 206, category: "Science" },
+      { question: "How many miles per hour is the speed of sound (roughly)?", answer: 767, category: "Science" },
+      { question: "How many countries are in the European Union (as of 2023)?", answer: 27, category: "Geography" },
+      { question: "What is the freezing point of water in Celsius?", answer: 0, category: "Science" },
+      { question: "How many countries are in Africa?", answer: 54, category: "Geography" },
+      { question: "What is the boiling point of water in Fahrenheit?", answer: 212, category: "Science" },
+      { question: "How many time zones does Australia have?", answer: 3, category: "Geography" },
+      { question: "How many miles is the Earth's diameter (roughly)?", answer: 7918, category: "Science" },
+      { question: "How many countries does the equator pass through?", answer: 13, category: "Geography" },
+      { question: "What is the average human lifespan in years (globally)?", answer: 73, category: "Science" },
+      { question: "How many Great Pyramids are there in Giza?", answer: 3, category: "Geography" },
+      { question: "How many vertebrae does a human spine have?", answer: 33, category: "Science" },
+      { question: "How many countries border the Mediterranean Sea?", answer: 22, category: "Geography" },
+      
+      // Sports (10 questions)
+      { question: "How many teams are in the NBA?", answer: 30, category: "Sports" },
+      { question: "What year did the Olympics return to the United States (Atlanta)?", answer: 1996, category: "Sports" },
+      { question: "How many yards is an American football field (not including end zones)?", answer: 100, category: "Sports" },
+      { question: "How many teams are in the NFL?", answer: 32, category: "Sports" },
+      { question: "What year was the first Super Bowl?", answer: 1967, category: "Sports" },
+      { question: "How many minutes are in a soccer match (regulation)?", answer: 90, category: "Sports" },
+      { question: "How many players are on a baseball team's active roster?", answer: 26, category: "Sports" },
+      { question: "What year were the first modern Olympics held?", answer: 1896, category: "Sports" },
+      { question: "How many Grand Slam tennis tournaments are there per year?", answer: 4, category: "Sports" },
+      { question: "How many teams are in Major League Baseball?", answer: 30, category: "Sports" },
+      
+      // Technology & Science (15 questions)
+      { question: "How many megabytes are in one gigabyte?", answer: 1024, category: "Technology" },
+      { question: "What year was Google founded?", answer: 1998, category: "Technology" },
+      { question: "What year was Facebook founded?", answer: 2004, category: "Technology" },
+      { question: "How many bytes are in a kilobyte?", answer: 1024, category: "Technology" },
+      { question: "What year was the World Wide Web invented?", answer: 1989, category: "Technology" },
+      { question: "How many keys are on a standard QWERTY keyboard?", answer: 104, category: "Technology" },
+      { question: "What year was Microsoft founded?", answer: 1975, category: "Technology" },
+      { question: "How many bits are in a byte?", answer: 8, category: "Technology" },
+      { question: "What year was Apple founded?", answer: 1976, category: "Technology" },
+      { question: "How many pixels wide is HD resolution (1080p)?", answer: 1920, category: "Technology" },
+      { question: "What year was Twitter founded?", answer: 2006, category: "Technology" },
+      { question: "How many elements were on the periodic table in 1900?", answer: 86, category: "Science" },
+      { question: "What year was the first computer built (ENIAC)?", answer: 1946, category: "Technology" },
+      { question: "How many miles above Earth is considered space (Kármán line)?", answer: 62, category: "Science" },
+      { question: "What year was the transistor invented?", answer: 1947, category: "Technology" }
+    ],
+    
+    hard: [
+      // Historical Events & Figures (20 questions)
+      { question: "How old was Mozart when he died?", answer: 35, category: "History" },
+      { question: "What year was the Magna Carta signed?", answer: 1215, category: "History" },
+      { question: "How many years did the Hundred Years' War actually last?", answer: 116, category: "History" },
+      { question: "What year did the stock market crash, starting the Great Depression?", answer: 1929, category: "History" },
+      { question: "How old was Alexander the Great when he died?", answer: 32, category: "History" },
+      { question: "What year was the printing press invented?", answer: 1440, category: "History" },
+      { question: "How many years did Nelson Mandela spend in prison?", answer: 27, category: "History" },
+      { question: "What year was Napoleon Bonaparte born?", answer: 1769, category: "History" },
+      { question: "How old was Julius Caesar when he was assassinated?", answer: 55, category: "History" },
+      { question: "What year did the Black Death peak in Europe?", answer: 1348, category: "History" },
+      { question: "How many years did the Thirty Years' War last?", answer: 30, category: "History" },
+      { question: "What year was Joan of Arc burned at the stake?", answer: 1431, category: "History" },
+      { question: "How old was Cleopatra when she became pharaoh?", answer: 18, category: "History" },
+      { question: "What year did the Roman Empire fall?", answer: 476, category: "History" },
+      { question: "How many years did the Crusades last (first through ninth)?", answer: 196, category: "History" },
+      { question: "What year was Charlemagne crowned Holy Roman Emperor?", answer: 800, category: "History" },
+      { question: "How old was Benjamin Franklin when he signed the Declaration of Independence?", answer: 70, category: "History" },
+      { question: "What year did the Titanic sink?", answer: 1912, category: "History" },
+      { question: "How many years did the War of 1812 last?", answer: 3, category: "History" },
+      { question: "What year was the first successful airplane flight by the Wright Brothers?", answer: 1903, category: "History" },
+      
+      // Science & Technology (20 questions)
+      { question: "How many elements are on the periodic table (as of 2023)?", answer: 118, category: "Science" },
+      { question: "What is the approximate speed of light in miles per second?", answer: 186282, category: "Science" },
+      { question: "How many chromosomes do humans have?", answer: 46, category: "Science" },
+      { question: "What year was DNA structure discovered?", answer: 1953, category: "Science" },
+      { question: "How many degrees is a right angle?", answer: 90, category: "Math" },
+      { question: "How many chambers does an octopus heart have?", answer: 3, category: "Animals" },
+      { question: "What is the atomic number of gold?", answer: 79, category: "Science" },
+      { question: "How many moons does Jupiter have (approximately)?", answer: 95, category: "Science" },
+      { question: "What year was penicillin discovered?", answer: 1928, category: "Science" },
+      { question: "How many ribs does a human have?", answer: 24, category: "Science" },
+      { question: "What is the melting point of gold in Celsius?", answer: 1064, category: "Science" },
+      { question: "How many bones does a shark have?", answer: 0, category: "Animals" },
+      { question: "What year was the electron discovered?", answer: 1897, category: "Science" },
+      { question: "How many chambers does a bird's heart have?", answer: 4, category: "Animals" },
+      { question: "What is the speed of sound in meters per second?", answer: 343, category: "Science" },
+      { question: "How many teeth does a great white shark have?", answer: 300, category: "Animals" },
+      { question: "What year was insulin discovered?", answer: 1922, category: "Science" },
+      { question: "How many pairs of chromosomes do humans have?", answer: 23, category: "Science" },
+      { question: "What is the atomic number of carbon?", answer: 6, category: "Science" },
+      { question: "How many hearts does an octopus have?", answer: 3, category: "Animals" },
+      
+      // Geography & World Records (15 questions)
+      { question: "How many countries are members of the United Nations (as of 2023)?", answer: 193, category: "Geography" },
+      { question: "What is the approximate population of Tokyo in millions?", answer: 14, category: "Geography" },
+      { question: "How many miles long is the Great Wall of China (approximately)?", answer: 13170, category: "Geography" },
+      { question: "What is the deepest point in the ocean in feet (approximately)?", answer: 36200, category: "Geography" },
+      { question: "What is the highest mountain peak in the world in feet?", answer: 29032, category: "Geography" },
+      { question: "How many languages are spoken in Papua New Guinea?", answer: 820, category: "Geography" },
+      { question: "What is the length of the Amazon River in miles?", answer: 4000, category: "Geography" },
+      { question: "How many countries does the Nile River flow through?", answer: 11, category: "Geography" },
+      { question: "What is the area of Vatican City in acres?", answer: 121, category: "Geography" },
+      { question: "How many islands make up Japan?", answer: 6852, category: "Geography" },
+      { question: "What is the population of Monaco (approximately)?", answer: 39000, category: "Geography" },
+      { question: "How many time zones does France have?", answer: 12, category: "Geography" },
+      { question: "What is the length of the Panama Canal in miles?", answer: 50, category: "Geography" },
+      { question: "How many waterfalls are in Niagara Falls?", answer: 3, category: "Geography" },
+      { question: "What is the altitude of La Paz, Bolivia in feet?", answer: 12000, category: "Geography" },
+      
+      // Arts, Literature & Culture (15 questions)
+      { question: "How many symphonies did Beethoven compose?", answer: 9, category: "Music" },
+      { question: "What year was Shakespeare born?", answer: 1564, category: "Literature" },
+      { question: "How many paintings did Van Gogh sell during his lifetime?", answer: 1, category: "Art" },
+      { question: "How many books are in Dante's Divine Comedy?", answer: 3, category: "Literature" },
+      { question: "How many lines are in a sonnet?", answer: 14, category: "Literature" },
+      { question: "What year was the Mona Lisa painted?", answer: 1503, category: "Art" },
+      { question: "How many operas did Mozart compose?", answer: 22, category: "Music" },
+      { question: "What year was the Sistine Chapel ceiling completed?", answer: 1512, category: "Art" },
+      { question: "How many plays did Shakespeare write?", answer: 37, category: "Literature" },
+      { question: "What year was the first Nobel Prize awarded?", answer: 1901, category: "History" },
+      { question: "How many movements does Beethoven's 9th Symphony have?", answer: 4, category: "Music" },
+      { question: "What year was 'Don Quixote' published?", answer: 1605, category: "Literature" },
+      { question: "How many strings does a violin have?", answer: 4, category: "Music" },
+      { question: "What year was the Statue of Liberty dedicated?", answer: 1886, category: "History" },
+      { question: "How many keys does a grand piano have?", answer: 88, category: "Music" },
+      
+      // Sports & Records (10 questions)
+      { question: "What year did Babe Ruth hit 60 home runs?", answer: 1927, category: "Sports" },
+      { question: "What is Tiger Woods' lowest tournament score (72-hole)?", answer: 261, category: "Sports" },
+      { question: "How many Formula 1 World Championships did Michael Schumacher win?", answer: 7, category: "Sports" },
+      { question: "How many minutes are in an NBA game (regulation)?", answer: 48, category: "Sports" },
+      { question: "What year was Muhammad Ali born?", answer: 1942, category: "Sports" },
+      { question: "How many goals did Pelé score in his career?", answer: 1281, category: "Sports" },
+      { question: "What year did Jackie Robinson break baseball's color barrier?", answer: 1947, category: "Sports" },
+      { question: "How many Olympic gold medals did Michael Phelps win?", answer: 23, category: "Sports" },
+      { question: "What year was the first FIFA World Cup held?", answer: 1930, category: "Sports" },
+      { question: "How many Super Bowl championships did Tom Brady win?", answer: 7, category: "Sports" }
+    ]
+  };
+
+  // Theme and sound setup (same as crossword game)
+  if (typeof(Storage) !== "undefined" && localStorage) {
+    if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'dark');
+    if (!localStorage.getItem('sound')) localStorage.setItem('sound', 'off');
+    darkToggle.checked = localStorage.getItem('theme') === 'dark';
+    soundToggle.checked = localStorage.getItem('sound') === 'on';
+  } else {
+    darkToggle.checked = true;
+    soundToggle.checked = false;
+  }
+  setTheme(darkToggle.checked ? 'dark' : 'light');
+
+  // Event listeners for toggles
+  darkToggle.addEventListener('change', function () {
+    setTheme(this.checked ? 'dark' : 'light');
+    if (typeof(Storage) !== "undefined" && localStorage) {
+      localStorage.setItem('theme', this.checked ? 'dark' : 'light');
+    }
+    showFade(this.checked ? '🌙 Dark Mode ON' : '☀️ Light Mode ON');
+  });
+
+  soundToggle.addEventListener('change', function () {
+    if (typeof(Storage) !== "undefined" && localStorage) {
+      localStorage.setItem('sound', this.checked ? 'on' : 'off');
+    }
+    handleSoundToggle(this.checked);
+    showFade(this.checked ? '🔊 Sound ON' : '🔇 Sound OFF');
+  });
+
+  // Music functions (simplified from crossword game)
+  function handleSoundToggle(soundOn) {
+    if (soundOn) {
+      if (/Safari|iPad/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
+        showFade('🔊 Sound ON - Beeps Only (Safari Optimized)');
+        return;
+      }
+      showFade('🔊 Sound ON - Click anywhere to start music!');
+    } else {
+      const iframe = document.getElementById('yt-music');
+      if (iframe) iframe.src = '';
+      musicStarted = false;
+      musicInitialized = false;
+      showFade('🔇 Sound OFF');
+    }
+  }
+
+  function initializeMusic() {
+    if (/Safari|iPad/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
+      showFade('🎵 Retro Beep Mode Active!');
+      musicInitialized = true;
+      return;
+    }
+    
+    if (!soundToggle.checked || musicInitialized) return;
+    musicInitialized = true;
+    loadTrack(0);
+    showFade('🎵 Music Starting!');
+  }
+
+  function loadTrack(index) {
+    if (!soundToggle.checked) return;
+    currentTrackIndex = (index + playlist.length) % playlist.length;
+    const videoId = playlist[currentTrackIndex];
+    const iframe = document.getElementById('yt-music');
+    if (!iframe) return;
+    
+    const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=0&controls=0&mute=0&enablejsapi=1&origin=${window.location.origin}&rel=0&start=0&modestbranding=1&playsinline=1&fs=0&cc_load_policy=0&iv_load_policy=3&autohide=1`;
+    iframe.src = newSrc;
+    musicStarted = true;
+    createBeepSound(600, 150);
+    showFade(`🎵 Track ${currentTrackIndex + 1}: Loading...`);
+  }
+
+  function changeTrack(direction) {
+    if (!soundToggle.checked) {
+      showFade('🔇 Turn on sound first!');
+      return;
+    }
+    
+    if (/Safari|iPad/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
+      createBeepSound(400 + (direction * 200), 300);
+      showFade(`🎵 Beep Track ${Math.abs(direction) === 1 ? (direction > 0 ? 'Up' : 'Down') : 'Change'}`);
+      return;
+    }
+    
+    if (!musicInitialized) {
+      initializeMusic();
+      return;
+    }
+    currentTrackIndex = (currentTrackIndex + direction + playlist.length) % playlist.length;
+    loadTrack(currentTrackIndex);
+  }
+
+  document.addEventListener('click', function(e) {
+    if (soundToggle.checked && !musicInitialized) {
+      initializeMusic();
+    }
+  }, { once: false });
+
+  document.getElementById('prev-track').addEventListener('click', () => changeTrack(-1));
+  document.getElementById('next-track').addEventListener('click', () => changeTrack(1));
+  
+  document.getElementById('beeps-only').addEventListener('click', () => {
+    const iframe = document.getElementById('yt-music');
+    if (iframe) iframe.src = 'about:blank';
+    musicInitialized = false;
+    musicStarted = false;
+    createBeepSound(600, 200);
+    showFade('🎵 Retro Beeps Only Mode!');
+  });
+
+  if (/Safari|iPad/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
+    const iframe = document.getElementById('yt-music');
+    if (iframe) {
+      iframe.src = 'about:blank';
+      iframe.style.display = 'none';
+    }
+  }
+
+  function setTheme(mode) {
+    document.body.classList.toggle('light-mode', mode === 'light');
+    lobbyDiv.classList.toggle('light-mode', mode === 'light');
+    gameAreaDiv.classList.toggle('light-mode', mode === 'light');
+    
+    document.getElementById('settings-label').classList.toggle('light-mode', mode === 'light');
+    document.getElementById('title').classList.toggle('light-mode', mode === 'light');
+    
+    document.querySelectorAll('.lobby-form input, .lobby-form select').forEach(el => {
+      el.classList.toggle('light-mode', mode === 'light');
+    });
+    document.querySelectorAll('.mode-button').forEach(el => {
+      el.classList.toggle('light-mode', mode === 'light');
+    });
+    document.getElementById('hud').classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.question-area').classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.question-category').classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.question-text').classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.difficulty-indicator').classList.toggle('light-mode', mode === 'light');
+    document.querySelectorAll('.guess-label').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+    document.querySelectorAll('.guess-input').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+    document.querySelector('.result-area').classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.head-to-head-area').classList.toggle('light-mode', mode === 'light');
+    document.querySelectorAll('.player-name').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+    playerTurnDisplay.classList.toggle('light-mode', mode === 'light');
+    highScoreDisplay.classList.toggle('light-mode', mode === 'light');
+    comboHud.classList.toggle('light-mode', mode === 'light');
+    comboDisplay.classList.toggle('light-mode', mode === 'light');
+    document.querySelector('.leaderboard-title').classList.toggle('light-mode', mode === 'light');
+    document.querySelectorAll('.tab').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+    document.querySelectorAll('.leaderboard li').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+    document.querySelectorAll('.toggles label').forEach(el => el.classList.toggle('light-mode', mode === 'light'));
+  }
+
+  // Enhanced lobby mode selection logic
+  document.getElementById('start-single').addEventListener('click', function () {
+    gameMode = 'single';
+    player2Section.classList.add('hidden');
+    twoPlayerOptions.classList.remove('show');
+    startGame();
+  });
+
+  document.getElementById('start-two').addEventListener('click', function () {
+    player2Section.classList.remove('hidden');
+    twoPlayerOptions.classList.add('show');
+    player2NameInput.focus();
+  });
+
+  document.getElementById('start-head-to-head').addEventListener('click', function () {
+    gameMode = 'head-to-head';
+    startGame();
+  });
+
+  document.getElementById('start-turn-based').addEventListener('click', function () {
+    gameMode = 'turn-based';
+    startGame();
+  });
+
+  backToOneButton.addEventListener('click', function () {
+    player2Section.classList.add('hidden');
+    twoPlayerOptions.classList.remove('show');
+  });
+
+  // Leaderboard functions
+  window.switchTab = function(tab) {
+    currentLeaderboardTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t => {
+      if (t.textContent.toLowerCase() === tab) {
+        t.classList.add('active');
+      }
+    });
+    renderLeaderboard();
+  };
+
+  function renderLeaderboard() {
+    const list = document.getElementById('leaderboard-list');
+    let arr = leaderboards[currentLeaderboardTab] || [];
+    list.innerHTML = arr.length ? arr.slice(0, 5).map((e, i) => `<li>${i + 1}. ${e.name} — ${e.score}</li>`).join('') : '<li>No scores yet</li>';
+  }
+
+  function saveLeaderboard() {
+    if (typeof(Storage) !== "undefined" && localStorage) {
+      localStorage.setItem('hiloLeaderboards', JSON.stringify(leaderboards));
+    }
+  }
+
+  function addScore(name, score, difficulty) {
+    let arr = leaderboards[difficulty] || [];
+    arr.push({ name, score });
+    arr = arr.sort((a, b) => b.score - a.score).slice(0, 5);
+    leaderboards[difficulty] = arr;
+    saveLeaderboard();
+    renderLeaderboard();
+  }
+
+  // Game flow functions
+  function startGame() {
+    player1Name = player1NameInput.value.trim() || "Player 1";
+    player2Name = player2NameInput.value.trim() || "Player 2";
+    currentDifficulty = difficultySelect.value;
+    
+    lobbyDiv.classList.add('hidden');
+    gameAreaDiv.style.display = 'block';
+    setTheme(darkToggle.checked ? 'dark' : 'light');
+    
+    // Set up UI based on game mode
+    if (gameMode === 'single') {
+      playerTurnDisplay.textContent = `${player1Name} - Single Player`;
+      singleInputs.style.display = 'flex';
+      headToHeadArea.classList.remove('show');
+      currentRound = 1;
+      player1Score = 0;
+      currentCombo = 0;
+      maxCombo = 0;
+    } else if (gameMode === 'head-to-head') {
+      playerTurnDisplay.textContent = `${player1Name} vs ${player2Name} - Head-to-Head`;
+      singleInputs.style.display = 'none';
+      headToHeadArea.classList.add('show');
+      document.getElementById('player1-display').textContent = player1Name;
+      document.getElementById('player2-display').textContent = player2Name;
+      currentRound = 1;
+      player1Score = 0;
+      player2Score = 0;
+      maxRounds = 10;
+    } else if (gameMode === 'turn-based') {
+      currentPlayer = 1;
+      playerTurnDisplay.textContent = `${player1Name}'s Turn`;
+      singleInputs.style.display = 'flex';
+      headToHeadArea.classList.remove('show');
+      currentRound = 1;
+      player1Score = 0;
+      player2Score = 0;
+      maxRounds = 10;
+    }
+    
+    gameInProgress = true;
+    loadQuestion();
+    updateHUD();
+  }
+
+  function loadQuestion() {
+    const questions = triviaQuestions[currentDifficulty];
+    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+    
+    // Don't show category until after guess (mystery mode)
+    questionCategory.textContent = "MYSTERY";
+    questionCategory.classList.remove('revealed');
+    questionText.textContent = currentQuestion.question;
+    
+    // Set difficulty indicator
+    const difficultyLabels = {
+      easy: 'EASY DIFFICULTY - Wide ranges accepted',
+      medium: 'MEDIUM DIFFICULTY - Moderate precision',
+      hard: 'HARD DIFFICULTY - Precision required'
+    };
+    difficultyIndicator.textContent = difficultyLabels[currentDifficulty];
+    
+    // Set placeholder ranges based on difficulty
+    const rangeSizes = {
+      easy: { min: 50, max: 200 },
+      medium: { min: 25, max: 100 },
+      hard: { min: 5, max: 50 }
+    };
+    const range = rangeSizes[currentDifficulty];
+    const suggestedLow = Math.max(0, currentQuestion.answer - range.max);
+    const suggestedHigh = currentQuestion.answer + range.max;
+    
+    // Set placeholders for all inputs
+    const inputs = [
+      { low: lowGuessInput, high: highGuessInput },
+      { low: document.getElementById('p1-low-guess'), high: document.getElementById('p1-high-guess') },
+      { low: document.getElementById('p2-low-guess'), high: document.getElementById('p2-high-guess') }
+    ];
+    
+    inputs.forEach(inputPair => {
+      if (inputPair.low && inputPair.high) {
+        inputPair.low.placeholder = suggestedLow.toString();
+        inputPair.high.placeholder = suggestedHigh.toString();
+        inputPair.low.value = '';
+        inputPair.high.value = '';
+      }
+    });
+    
+    // Clear previous results
+    resultArea.classList.add('hidden');
+    submitButton.disabled = false;
+    submitHeadToHeadButton.disabled = false;
+  }
+
+  // Enhanced percentage-based scoring system
+  function calculateScore(lowGuess, highGuess, answer) {
+    const rangeWidth = highGuess - lowGuess;
+    const rangeMidpoint = (lowGuess + highGuess) / 2;
+    const isCorrect = answer >= lowGuess && answer <= highGuess;
+    
+    if (!isCorrect) {
+      return { points: 0, accuracy: 0, rangeBonus: 0 };
+    }
+    
+    // Base points for correct guess
+    let points = 50;
+    
+    // Accuracy bonus based on how close range midpoint is to actual answer
+    const maxAccuracyDistance = Math.max(100, Math.abs(answer * 0.5)); // Dynamic based on answer size
+    const accuracyDistance = Math.abs(rangeMidpoint - answer);
+    const accuracyScore = Math.max(0, (maxAccuracyDistance - accuracyDistance) / maxAccuracyDistance);
+    const accuracyBonus = Math.floor(accuracyScore * 50); // Up to 50 bonus points
+    
+    // Range precision bonus (smaller ranges = more points)
+    const difficultyMultipliers = { easy: 0.5, medium: 1.0, hard: 1.5 };
+    const difficultyMultiplier = difficultyMultipliers[currentDifficulty];
+    const maxRangeBonus = 100 * difficultyMultiplier;
+    const minRange = Math.max(1, Math.abs(answer * 0.01)); // Dynamic minimum range
+    const maxRange = Math.max(50, Math.abs(answer * 0.5)); // Dynamic maximum range
+    const normalizedRange = Math.min(Math.max(rangeWidth, minRange), maxRange);
+    const rangeBonus = Math.floor(maxRangeBonus * (maxRange - normalizedRange) / (maxRange - minRange));
+    
+    points += accuracyBonus + rangeBonus;
+    
+    return { 
+      points: Math.floor(points), 
+      accuracy: Math.floor(accuracyScore * 100), 
+      rangeBonus: rangeBonus,
+      accuracyBonus: accuracyBonus
+    };
+  }
+
+  window.submitGuess = function() {
+    const lowGuess = parseInt(lowGuessInput.value);
+    const highGuess = parseInt(highGuessInput.value);
+    
+    if (isNaN(lowGuess) || isNaN(highGuess)) {
+      showFade('❌ Please enter valid numbers!');
+      return;
+    }
+    
+    if (lowGuess >= highGuess) {
+      showFade('❌ Low guess must be less than high guess!');
+      return;
+    }
+    
+    evaluateGuess(lowGuess, highGuess, 'single');
+  };
+
+  window.submitHeadToHead = function() {
+    const p1Low = parseInt(document.getElementById('p1-low-guess').value);
+    const p1High = parseInt(document.getElementById('p1-high-guess').value);
+    const p2Low = parseInt(document.getElementById('p2-low-guess').value);
+    const p2High = parseInt(document.getElementById('p2-high-guess').value);
+    
+    if (isNaN(p1Low) || isNaN(p1High) || isNaN(p2Low) || isNaN(p2High)) {
+      showFade('❌ All players must enter valid numbers!');
+      return;
+    }
+    
+    if (p1Low >= p1High || p2Low >= p2High) {
+      showFade('❌ Low guesses must be less than high guesses!');
+      return;
+    }
+    
+    evaluateHeadToHead(p1Low, p1High, p2Low, p2High);
+  };
+
+  function evaluateGuess(lowGuess, highGuess, mode) {
+    const answer = currentQuestion.answer;
+    const isCorrect = answer >= lowGuess && answer <= highGuess;
+    const scoreResult = calculateScore(lowGuess, highGuess, answer);
+    
+    // Reveal category after guess
+    questionCategory.textContent = currentQuestion.category.toUpperCase();
+    questionCategory.classList.add('revealed');
+    
+    if (isCorrect) {
+      // Combo system for single player
+      if (gameMode === 'single') {
+        currentCombo++;
+        if (currentCombo > maxCombo) maxCombo = currentCombo;
+        
+        // Apply combo multiplier
+        const comboMultiplier = 1 + (currentCombo - 1) * 0.2; // 20% per combo level
+        const finalPoints = Math.floor(scoreResult.points * comboMultiplier);
+        
+        player1Score += finalPoints;
+        
+        // Combo visual effects
+        const comboText = currentCombo > 1 ? `🔥 ${currentCombo}x COMBO! ` : '';
+        comboDisplay.innerHTML = `<span class="combo-display ${currentCombo > 1 ? 'combo-active' : ''}">${comboText}${comboMultiplier.toFixed(1)}x Multiplier!</span>`;
+        
+        // Play special combo sounds
+        if (currentCombo === 3) createBeepSound(900, 150);
+        else if (currentCombo === 5) createBeepSound(1100, 200);
+        else if (currentCombo >= 10) createBeepSound(1300, 250);
+        else playWinSound();
+        
+        resultText.innerHTML = `<span class="correct">✅ Correct! Range: ${highGuess - lowGuess}</span>`;
+        pointsEarned.innerHTML = `<span class="points">Base: ${scoreResult.points} × ${comboMultiplier.toFixed(1)} = ${finalPoints} points!</span>`;
+        
+      } else {
+        // Turn-based mode
+        if (currentPlayer === 1) {
+          player1Score += scoreResult.points;
+        } else {
+          player2Score += scoreResult.points;
+        }
+        
+        playWinSound();
+        resultText.innerHTML = `<span class="correct">✅ Correct!</span>`;
+        pointsEarned.innerHTML = `<span class="points">Points Earned: ${scoreResult.points}</span>`;
+      }
+      
+    } else {
+      // Reset combo for single player
+      if (gameMode === 'single') {
+        currentCombo = 0;
+        comboDisplay.innerHTML = '';
+      }
+      
+      playLoseSound();
+      resultText.innerHTML = `<span class="incorrect">❌ Incorrect! Your range: ${lowGuess}-${highGuess}</span>`;
+      pointsEarned.innerHTML = `<span class="points">Points Earned: 0</span>`;
+    }
+    
+    // Show results
+    actualAnswer.textContent = `Actual Answer: ${answer}`;
+    resultArea.classList.remove('hidden');
+    submitButton.disabled = true;
+    updateHUD();
+    
+    // Check for game end in turn-based mode
+    if (gameMode === 'turn-based' && currentRound >= maxRounds && currentPlayer === 2) {
+      setTimeout(() => endTwoPlayerGame(), 2000);
+    }
+  }
+
+  function evaluateHeadToHead(p1Low, p1High, p2Low, p2High) {
+    const answer = currentQuestion.answer;
+    const p1Result = calculateScore(p1Low, p1High, answer);
+    const p2Result = calculateScore(p2Low, p2High, answer);
+    
+    // Reveal category after guess
+    questionCategory.textContent = currentQuestion.category.toUpperCase();
+    questionCategory.classList.add('revealed');
+    
+    let winnerText = '';
+    if (p1Result.points > p2Result.points) {
+      player1Score += p1Result.points;
+      winnerText = `${player1Name} wins this round!`;
+      playWinSound();
+    } else if (p2Result.points > p1Result.points) {
+      player2Score += p2Result.points;
+      winnerText = `${player2Name} wins this round!`;
+      playWinSound();
+    } else {
+      // Tie - both get points
+      player1Score += p1Result.points;
+      player2Score += p2Result.points;
+      winnerText = "It's a tie! Both players score!";
+      createBeepSound(700, 200);
+    }
+    
+    resultText.innerHTML = `<span class="correct">${winnerText}</span>`;
+    actualAnswer.textContent = `Actual Answer: ${answer}`;
+    pointsEarned.innerHTML = `<span class="points">${player1Name}: ${p1Result.points} | ${player2Name}: ${p2Result.points}</span>`;
+    comboDisplay.innerHTML = `<div>${player1Name} Range: ${p1High - p1Low} | ${player2Name} Range: ${p2High - p2Low}</div>`;
+    
+    resultArea.classList.remove('hidden');
+    submitHeadToHeadButton.disabled = true;
+    updateHUD();
+    
+    // Check for game end
+    if (currentRound >= maxRounds) {
+      setTimeout(() => endTwoPlayerGame(), 2000);
+    }
+  }
+
+  function updateHUD() {
+    if (typeof(Storage) !== "undefined" && localStorage) {
+      currentHighScore = parseInt(localStorage.getItem('hiloHighScore-' + currentDifficulty) || '0');
+    } else {
+      currentHighScore = 0;
+    }
+    
+    highScoreDisplay.textContent = `High Score: ${currentHighScore}`;
+    
+    if (gameMode === 'single') {
+      hudDisplay.textContent = `Score: ${player1Score} | Round: ${currentRound} | Combo: ${currentCombo}x`;
+      comboHud.textContent = currentCombo > 0 ? `🔥 Combo Streak: ${currentCombo} | 🏆 Max: ${maxCombo}` : '';
+    } else if (gameMode === 'head-to-head') {
+      hudDisplay.textContent = `${player1Name}: ${player1Score} | ${player2Name}: ${player2Score} | Round: ${currentRound}/${maxRounds}`;
+      comboHud.textContent = '';
+    } else if (gameMode === 'turn-based') {
+      hudDisplay.textContent = `${player1Name}: ${player1Score} | ${player2Name}: ${player2Score} | Round: ${currentRound}/${maxRounds}`;
+      comboHud.textContent = '';
+    }
+  }
+
+  window.nextQuestion = function() {
+    if (!gameInProgress) return;
+    
+    if (gameMode === 'turn-based') {
+      if (currentPlayer === 1) {
+        currentPlayer = 2;
+        playerTurnDisplay.textContent = `${player2Name}'s Turn`;
+      } else {
+        currentPlayer = 1;
+        currentRound++;
+        playerTurnDisplay.textContent = `${player1Name}'s Turn`;
+      }
+      
+      if (currentRound > maxRounds) {
+        endTwoPlayerGame();
+        return;
+      }
+    } else {
+      currentRound++;
+    }
+    
+    loadQuestion();
+    updateHUD();
+  };
+
+  window.skipQuestion = function() {
+    if (!gameInProgress) return;
+    
+    // Reset combo for single player when skipping
+    if (gameMode === 'single') {
+      currentCombo = 0;
+      comboDisplay.innerHTML = '';
+      comboHud.textContent = '';
+    }
+    
+    showFade('⏭️ Question Skipped!');
+    nextQuestion();
+  };
+
+  function endTwoPlayerGame() {
+    gameInProgress = false;
+    
+    let winnerText;
+    let winnerScore;
+    let winnerName;
+    
+    if (player1Score > player2Score) {
+      winnerText = `${player1Name} Wins!`;
+      winnerScore = player1Score;
+      winnerName = player1Name;
+    } else if (player2Score > player1Score) {
+      winnerText = `${player2Name} Wins!`;
+      winnerScore = player2Score;
+      winnerName = player2Name;
+    } else {
+      winnerText = "It's a Tie!";
+      winnerScore = player1Score;
+      winnerName = `${player1Name} & ${player2Name}`;
+    }
+    
+    // Update high score and leaderboard
+    if (winnerScore > currentHighScore) {
+      currentHighScore = winnerScore;
+      if (typeof(Storage) !== "undefined" && localStorage) {
+        localStorage.setItem('hiloHighScore-' + currentDifficulty, currentHighScore);
+      }
+    }
+    
+    addScore(winnerName, winnerScore, currentDifficulty);
+    
+    showFade(`🎮 Game Over!<br>${player1Name}: ${player1Score}<br>${player2Name}: ${player2Score}<br><br>${winnerText}`);
+    
+    setTimeout(() => {
+      if (player1Score !== player2Score) playWinSound();
+    }, 1000);
+  }
+
+  window.backToLobby = function() {
+    // Save single player high score
+    if (gameMode === 'single' && player1Score > 0) {
+      if (player1Score > currentHighScore) {
+        currentHighScore = player1Score;
+        if (typeof(Storage) !== "undefined" && localStorage) {
+          localStorage.setItem('hiloHighScore-' + currentDifficulty, currentHighScore);
+        }
+      }
+      addScore(player1Name, player1Score, currentDifficulty);
+    }
+    
+    gameInProgress = false;
+    lobbyDiv.classList.remove('hidden');
+    gameAreaDiv.style.display = 'none';
+    player2Section.classList.add('hidden');
+    twoPlayerOptions.classList.remove('show');
+    renderLeaderboard();
+  };
+
+  // Input validation for all number inputs
+  document.querySelectorAll('.guess-input').forEach(input => {
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9-]/g, '');
+    });
+  });
+
+  // Enter key to submit
+  document.querySelectorAll('.guess-input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        if (gameMode === 'head-to-head') {
+          submitHeadToHead();
+        } else {
+          submitGuess();
+        }
+      }
+    });
+  });
+
+  function showFade(msg) {
+    const fade = document.getElementById('fade-black');
+    fade.innerHTML = msg;
+    fade.classList.add('show');
+    setTimeout(() => {
+      fade.classList.remove('show');
+    }, 1500);
+  }
+
+  // Enhanced sound effects
+  function playWinSound() {
+    if (!soundToggle.checked) return;
+    createBeepSound(800, 200);
+  }
+
+  function playLoseSound() {
+    if (!soundToggle.checked) return;
+    createBeepSound(300, 500);
+  }
+
+  function createBeepSound(frequency, duration) {
+    if (!soundToggle.checked) return;
+    
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = frequency || 600;
+      oscillator.type = 'square';
+      
+      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + (duration || 200) / 1000);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + (duration || 200) / 1000);
+    } catch (e) {
+      console.log('Audio context not available, silent mode');
+    }
+  }
+
+  // Initialize
+  renderLeaderboard();
+  const currentTheme = (typeof(Storage) !== "undefined" && localStorage) ? localStorage.getItem('theme') : 'dark';
+  setTheme(currentTheme === 'dark' ? 'dark' : 'light');
+  
+  // Count total questions for fallback system
+  const totalQuestions = Object.values(triviaQuestions).reduce((total, difficulty) => total + difficulty.length, 0);
+  console.log(`🎮 NES Hi-Lo Trivia Game - Enhanced Edition with ${totalQuestions} questions initialized!`);
+  console.log(`📊 Question Breakdown: Easy: ${triviaQuestions.easy.length}, Medium: ${triviaQuestions.medium.length}, Hard: ${triviaQuestions.hard.length}`);
+  console.log('🎵 Music controls are visible and functional!');
+});
+</script>
 </body>
 </html>
