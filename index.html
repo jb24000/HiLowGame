@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hi-Low Trivia Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container" id="lobby">
+    <div class="title" id="title">🎮 Hi-Low Trivia 🎮</div>
+
+    <div class="toggles">
+      <label>🌙 Dark
+        <label class="switch"><input type="checkbox" id="darkToggle" checked><span class="slider"></span></label>
+      </label>
+      <label>🔊 Sound
+        <label class="switch"><input type="checkbox" id="soundToggle"><span class="slider"></span></label>
+      </label>
+    </div>
+
+    <div class="music-controls">
+      <button id="prev-track">⏮ Prev</button>
+      <button id="next-track">Next ⏭</button>
+    </div>
+
+    <div class="lobby-form">
+      <label for="difficulty">🧠 Select Difficulty</label>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <button class="mode-button" id="start-1p">▶️ Start 1 Player</button>
+      <button class="mode-button" id="start-2p">🎮 Start 2 Player</button>
+      <button class="mode-button hidden" id="back-to-one">🔙 Back to 1 Player</button>
+    </div>
+  </div>
+
+  <div id="game-area" class="hidden">
+    <div id="hud">
+      <div id="current-player"></div>
+      <div id="streak-counter"></div>
+    </div>
+
+    <div id="question-box">
+      <p id="trivia-question">Loading question...</p>
+    </div>
+
+    <div class="input-section">
+      <label>Enter Your Guess Range:</label>
+      <input type="number" id="low-guess" placeholder="Low" />
+      <input type="number" id="high-guess" placeholder="High" />
+      <button id="submit-guess">Submit</button>
+    </div>
+
+    <div id="feedback"></div>
+
+    <div class="game-buttons">
+      <button id="next-question">Next Question</button>
+      <button id="reset-game">Reset Game</button>
+    </div>
+
+    <div class="leaderboard">
+      <div class="leaderboard-title">🏆 Leaderboard</div>
+      <div class="tabs">
+        <div class="tab active" data-tab="all-time">All Time</div>
+        <div class="tab" data-tab="daily">Today</div>
+      </div>
+      <ul id="leaderboard-list">
+        <!-- Leaderboard entries here -->
+      </ul>
+    </div>
+  </div>
+
+  <iframe
+    id="ytMusicIframe"
+    width="0"
+    height="0"
+    frameborder="0"
+    allow="autoplay"
+    src="https://www.youtube.com/embed/videoseries?list=PLo1KWwpO1Dle_v5TRFbZl_P_M3ooUBxe2&enablejsapi=1"
+    style="display: none;"
+  ></iframe>
+
+  <script src="script.js"></script>
+</body>
+</html>
