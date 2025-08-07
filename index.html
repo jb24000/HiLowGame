@@ -249,12 +249,6 @@
       gap: 8px; 
       margin: 15px auto 18px auto; 
       justify-content: center; 
-      padding: 10px; 
-      background: rgba(0,0,0,0.3); 
-      border-radius: 12px; 
-      border: 2px solid #FFD700; 
-      box-shadow: 2px 2px 0px #333; 
-      width: fit-content; 
     }
     
     .music-controls button { 
@@ -434,6 +428,7 @@
     .correct { color: #00ff88; }
     .incorrect { color: #ff6b6b; }
     .points { color: #FFD700; }
+    .exact-match { color: #FFD700; font-weight: bold; text-shadow: 2px 2px 0px #000; }
     
     .actual-answer { 
       font-size: 20px; 
@@ -455,6 +450,10 @@
       animation: comboGlow 1s ease-in-out infinite alternate; 
     }
     
+    .exact-bonus-animation {
+      animation: exactMatchGlow 1.5s ease-in-out;
+    }
+    
     @keyframes comboGlow {
       from { 
         color: #ff6b6b; 
@@ -463,6 +462,23 @@
       to { 
         color: #ff9999; 
         text-shadow: 2px 2px 0px #000, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b; 
+      }
+    }
+    
+    @keyframes exactMatchGlow {
+      0% { 
+        color: #FFD700; 
+        text-shadow: 2px 2px 0px #000; 
+      }
+      50% { 
+        color: #FFFF00; 
+        text-shadow: 2px 2px 0px #000, 0 0 15px #FFD700, 0 0 25px #FFD700; 
+        transform: scale(1.05);
+      }
+      100% { 
+        color: #FFD700; 
+        text-shadow: 2px 2px 0px #000; 
+        transform: scale(1);
       }
     }
     
@@ -678,14 +694,12 @@
       .toggles { gap: 15px; margin-bottom: 15px; }
       .toggles label { display: flex; align-items: center; gap: 8px; font-size: 11px; }
       .music-controls { 
-        justify-content: center; 
         margin: 10px auto 15px auto; 
-        gap: 8px; 
-        padding: 8px; 
+        gap: 6px; 
       }
       .music-controls button { 
         font-size: 12px; 
-        padding: 8px 10px; 
+        padding: 6px 8px; 
       }
       .mode-buttons { gap: 8px; }
       .mode-button { font-size: 14px; }
@@ -730,7 +744,6 @@
       </label>
     </label>
   </div>
-  <div class="settings-label" style="margin-bottom: 5px; font-size: 12px;">🎵 MUSIC CONTROLS</div>
   <div class="music-controls">
     <button id="beeps-only">🎵 Beeps Only</button>
     <button id="prev-track">⏮ Prev</button>
@@ -861,7 +874,106 @@ document.addEventListener('DOMContentLoaded', () => {
   let musicStarted = false;
   let musicInitialized = false;
 
-  // Game state variables
+  // API Integration for additional questions
+  let useAPI = true;
+  let apiQuestionCache = [];
+  let lastAPIFetch = 0;
+  
+  // Fetch questions from Open Trivia Database API
+  async function fetchAPIQuestions(difficulty) {
+    try {
+      // Don't fetch too frequently (cache for 5 minutes)
+      const now = Date.now();
+      if (now - lastAPIFetch < 300000 && apiQuestionCache.length > 0) {
+        return apiQuestionCache;
+      }
+      
+      const difficultyMap = {
+        'easy': 'easy',
+        'medium': 'medium', 
+        'hard': 'hard'
+      };
+      
+      const apiDifficulty = difficultyMap[difficulty] || 'medium';
+      const response = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=${apiDifficulty}&type=multiple`);
+      
+      if (!response.ok) {
+        throw new Error(`API response not ok: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.response_code !== 0 || !data.results || data.results.length === 0) {
+        throw new Error('Invalid API response or no results');
+      }
+      
+      // Convert API questions to our format (filter for numeric answers only)
+      const convertedQuestions = data.results
+        .map(q => convertAPIQuestion(q))
+        .filter(q => q !== null);
+      
+      if (convertedQuestions.length > 0) {
+        apiQuestionCache = convertedQuestions;
+        lastAPIFetch = now;
+        console.log(`✅ Fetched ${convertedQuestions.length} API questions for ${difficulty} difficulty`);
+        return convertedQuestions;
+      } else {
+        throw new Error('No valid numeric questions from API');
+      }
+      
+    } catch (error) {
+      console.log(`❌ API fetch failed: ${error.message}, using local questions`);
+      return [];
+    }
+  }
+  
+  // Convert API questions to our format (only keep questions with numeric answers)
+  function convertAPIQuestion(apiQ) {
+    try {
+      const question = decodeHTMLEntities(apiQ.question);
+      const correctAnswer = decodeHTMLEntities(apiQ.correct_answer);
+      
+      // Only accept questions where the correct answer is a number
+      const numericAnswer = parseInt(correctAnswer);
+      if (isNaN(numericAnswer)) {
+        return null; // Skip non-numeric answers
+      }
+      
+      // Determine category from API category
+      const categoryMap = {
+        'Sports': 'Sports',
+        'History': 'History', 
+        'Geography': 'Geography',
+        'Science & Nature': 'Science',
+        'Entertainment: Film': 'Movies',
+        'Entertainment: Music': 'Music',
+        'Entertainment: Television': 'TV',
+        'Art': 'Art',
+        'General Knowledge': 'General',
+        'Animals': 'Animals'
+      };
+      
+      const category = categoryMap[apiQ.category] || 'General';
+      
+      return {
+        question: question,
+        answer: numericAnswer,
+        category: category,
+        source: 'API'
+      };
+      
+    } catch (error) {
+      console.log(`Failed to convert API question: ${error.message}`);
+      return null;
+    }
+  }
+  
+  // Decode HTML entities in API responses
+  function decodeHTMLEntities(text) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
   let player1Name = '', player2Name = '', currentDifficulty = 'medium';
   let gameMode = 'single'; // 'single', 'head-to-head', 'turn-based'
   let currentPlayer = 1;
@@ -1391,7 +1503,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Game flow functions
-  function startGame() {
+  async function startGame() {
     player1Name = player1NameInput.value.trim() || "Player 1";
     player2Name = player2NameInput.value.trim() || "Player 2";
     currentDifficulty = difficultySelect.value;
@@ -1431,18 +1543,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     gameInProgress = true;
-    loadQuestion();
+    await loadQuestion(); // Wait for question loading
     updateHUD();
   }
 
-  function loadQuestion() {
-    const questions = triviaQuestions[currentDifficulty];
-    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+  // Enhanced question loading with API integration
+  async function loadQuestion() {
+    let selectedQuestion = null;
+    
+    // Try API first if enabled
+    if (useAPI) {
+      try {
+        const apiQuestions = await fetchAPIQuestions(currentDifficulty);
+        if (apiQuestions.length > 0) {
+          // Mix API questions with local questions (70% API, 30% local for variety)
+          if (Math.random() < 0.7) {
+            selectedQuestion = apiQuestions[Math.floor(Math.random() * apiQuestions.length)];
+            console.log('📡 Using API question:', selectedQuestion.question);
+          }
+        }
+      } catch (error) {
+        console.log('API question fetch failed, using local questions');
+      }
+    }
+    
+    // Fallback to local questions if API failed or not selected
+    if (!selectedQuestion) {
+      const localQuestions = triviaQuestions[currentDifficulty];
+      selectedQuestion = localQuestions[Math.floor(Math.random() * localQuestions.length)];
+      selectedQuestion.source = 'Local';
+      console.log('💾 Using local question:', selectedQuestion.question);
+    }
+    
+    currentQuestion = selectedQuestion;
     
     // Don't show category until after guess (mystery mode)
     questionCategory.textContent = "MYSTERY";
     questionCategory.classList.remove('revealed');
     questionText.textContent = currentQuestion.question;
+    
+    // Add subtle indicator for API questions
+    if (currentQuestion.source === 'API') {
+      questionText.innerHTML = currentQuestion.question + ' <small style="opacity:0.6;">📡</small>';
+    }
     
     // Set difficulty indicator
     const difficultyLabels = {
@@ -1452,17 +1595,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     difficultyIndicator.textContent = difficultyLabels[currentDifficulty];
     
-    // Set placeholder ranges based on difficulty
-    const rangeSizes = {
-      easy: { min: 50, max: 200 },
-      medium: { min: 25, max: 100 },
-      hard: { min: 5, max: 50 }
-    };
-    const range = rangeSizes[currentDifficulty];
-    const suggestedLow = Math.max(0, currentQuestion.answer - range.max);
-    const suggestedHigh = currentQuestion.answer + range.max;
-    
-    // Set placeholders for all inputs
+    // Clear all inputs - no hints, pure skill-based guessing
     const inputs = [
       { low: lowGuessInput, high: highGuessInput },
       { low: document.getElementById('p1-low-guess'), high: document.getElementById('p1-high-guess') },
@@ -1471,8 +1604,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     inputs.forEach(inputPair => {
       if (inputPair.low && inputPair.high) {
-        inputPair.low.placeholder = suggestedLow.toString();
-        inputPair.high.placeholder = suggestedHigh.toString();
+        inputPair.low.placeholder = "Low";
+        inputPair.high.placeholder = "High";
         inputPair.low.value = '';
         inputPair.high.value = '';
       }
@@ -1484,18 +1617,22 @@ document.addEventListener('DOMContentLoaded', () => {
     submitHeadToHeadButton.disabled = false;
   }
 
-  // Enhanced percentage-based scoring system
+  // Enhanced percentage-based scoring system with EXACT MATCH BONUS
   function calculateScore(lowGuess, highGuess, answer) {
     const rangeWidth = highGuess - lowGuess;
     const rangeMidpoint = (lowGuess + highGuess) / 2;
     const isCorrect = answer >= lowGuess && answer <= highGuess;
     
     if (!isCorrect) {
-      return { points: 0, accuracy: 0, rangeBonus: 0 };
+      return { points: 0, accuracy: 0, rangeBonus: 0, exactBonus: 0 };
     }
     
     // Base points for correct guess
     let points = 50;
+    
+    // NEW: Exact match bonus - if either low or high guess equals the answer
+    const exactMatch = (lowGuess === answer || highGuess === answer);
+    const exactBonus = exactMatch ? 50 : 0; // 50 bonus points for exact match!
     
     // Accuracy bonus based on how close range midpoint is to actual answer
     const maxAccuracyDistance = Math.max(100, Math.abs(answer * 0.5)); // Dynamic based on answer size
@@ -1512,13 +1649,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const normalizedRange = Math.min(Math.max(rangeWidth, minRange), maxRange);
     const rangeBonus = Math.floor(maxRangeBonus * (maxRange - normalizedRange) / (maxRange - minRange));
     
-    points += accuracyBonus + rangeBonus;
+    points += accuracyBonus + rangeBonus + exactBonus;
     
     return { 
       points: Math.floor(points), 
       accuracy: Math.floor(accuracyScore * 100), 
       rangeBonus: rangeBonus,
-      accuracyBonus: accuracyBonus
+      accuracyBonus: accuracyBonus,
+      exactBonus: exactBonus,
+      exactMatch: exactMatch
     };
   }
 
@@ -1579,18 +1718,40 @@ document.addEventListener('DOMContentLoaded', () => {
         
         player1Score += finalPoints;
         
-        // Combo visual effects
-        const comboText = currentCombo > 1 ? `🔥 ${currentCombo}x COMBO! ` : '';
-        comboDisplay.innerHTML = `<span class="combo-display ${currentCombo > 1 ? 'combo-active' : ''}">${comboText}${comboMultiplier.toFixed(1)}x Multiplier!</span>`;
+        // Enhanced combo and exact match display
+        let displayText = '';
+        if (scoreResult.exactMatch) {
+          displayText = `<span class="exact-match exact-bonus-animation">🎯 EXACT MATCH! +${scoreResult.exactBonus} bonus!</span><br>`;
+        }
+        if (currentCombo > 1) {
+          displayText += `<span class="combo-display combo-active">🔥 ${currentCombo}x COMBO! ${comboMultiplier.toFixed(1)}x Multiplier!</span>`;
+        }
+        comboDisplay.innerHTML = displayText;
         
-        // Play special combo sounds
-        if (currentCombo === 3) createBeepSound(900, 150);
-        else if (currentCombo === 5) createBeepSound(1100, 200);
-        else if (currentCombo >= 10) createBeepSound(1300, 250);
-        else playWinSound();
+        // Play special sounds for exact matches and combos
+        if (scoreResult.exactMatch) {
+          createBeepSound(1200, 300); // Special exact match sound
+        } else if (currentCombo === 3) {
+          createBeepSound(900, 150);
+        } else if (currentCombo === 5) {
+          createBeepSound(1100, 200);
+        } else if (currentCombo >= 10) {
+          createBeepSound(1300, 250);
+        } else {
+          playWinSound();
+        }
         
         resultText.innerHTML = `<span class="correct">✅ Correct! Range: ${highGuess - lowGuess}</span>`;
-        pointsEarned.innerHTML = `<span class="points">Base: ${scoreResult.points} × ${comboMultiplier.toFixed(1)} = ${finalPoints} points!</span>`;
+        
+        // Enhanced points display with exact bonus breakdown
+        let pointsBreakdown = `<span class="points">Base: ${50}`;
+        if (scoreResult.accuracyBonus > 0) pointsBreakdown += ` + Accuracy: ${scoreResult.accuracyBonus}`;
+        if (scoreResult.rangeBonus > 0) pointsBreakdown += ` + Range: ${scoreResult.rangeBonus}`;
+        if (scoreResult.exactBonus > 0) pointsBreakdown += ` + Exact Match: ${scoreResult.exactBonus}`;
+        pointsBreakdown += ` = ${scoreResult.points}`;
+        if (comboMultiplier > 1) pointsBreakdown += ` × ${comboMultiplier.toFixed(1)} = ${finalPoints}`;
+        pointsBreakdown += ` points!</span>`;
+        pointsEarned.innerHTML = pointsBreakdown;
         
       } else {
         // Turn-based mode
@@ -1600,9 +1761,22 @@ document.addEventListener('DOMContentLoaded', () => {
           player2Score += scoreResult.points;
         }
         
-        playWinSound();
-        resultText.innerHTML = `<span class="correct">✅ Correct!</span>`;
-        pointsEarned.innerHTML = `<span class="points">Points Earned: ${scoreResult.points}</span>`;
+        if (scoreResult.exactMatch) {
+          createBeepSound(1200, 300); // Special exact match sound
+        } else {
+          playWinSound();
+        }
+        
+        let resultMessage = `<span class="correct">✅ Correct!</span>`;
+        if (scoreResult.exactMatch) {
+          resultMessage += `<br><span class="exact-match exact-bonus-animation">🎯 EXACT MATCH BONUS!</span>`;
+        }
+        resultText.innerHTML = resultMessage;
+        
+        let pointsBreakdown = `<span class="points">Points: ${scoreResult.points}`;
+        if (scoreResult.exactBonus > 0) pointsBreakdown += ` (includes +${scoreResult.exactBonus} exact match bonus!)`;
+        pointsBreakdown += `</span>`;
+        pointsEarned.innerHTML = pointsBreakdown;
       }
       
     } else {
@@ -1639,25 +1813,48 @@ document.addEventListener('DOMContentLoaded', () => {
     questionCategory.classList.add('revealed');
     
     let winnerText = '';
+    let exactMatchText = '';
+    
+    // Check for exact matches
+    if (p1Result.exactMatch || p2Result.exactMatch) {
+      if (p1Result.exactMatch && p2Result.exactMatch) {
+        exactMatchText = `<br><span class="exact-match exact-bonus-animation">🎯 BOTH PLAYERS GOT EXACT MATCH!</span>`;
+      } else if (p1Result.exactMatch) {
+        exactMatchText = `<br><span class="exact-match exact-bonus-animation">🎯 ${player1Name} got EXACT MATCH!</span>`;
+      } else {
+        exactMatchText = `<br><span class="exact-match exact-bonus-animation">🎯 ${player2Name} got EXACT MATCH!</span>`;
+      }
+    }
+    
     if (p1Result.points > p2Result.points) {
       player1Score += p1Result.points;
       winnerText = `${player1Name} wins this round!`;
-      playWinSound();
+      if (p1Result.exactMatch) createBeepSound(1200, 300);
+      else playWinSound();
     } else if (p2Result.points > p1Result.points) {
       player2Score += p2Result.points;
       winnerText = `${player2Name} wins this round!`;
-      playWinSound();
+      if (p2Result.exactMatch) createBeepSound(1200, 300);
+      else playWinSound();
     } else {
       // Tie - both get points
       player1Score += p1Result.points;
       player2Score += p2Result.points;
       winnerText = "It's a tie! Both players score!";
-      createBeepSound(700, 200);
+      if (p1Result.exactMatch || p2Result.exactMatch) createBeepSound(1200, 300);
+      else createBeepSound(700, 200);
     }
     
-    resultText.innerHTML = `<span class="correct">${winnerText}</span>`;
+    resultText.innerHTML = `<span class="correct">${winnerText}</span>${exactMatchText}`;
     actualAnswer.textContent = `Actual Answer: ${answer}`;
-    pointsEarned.innerHTML = `<span class="points">${player1Name}: ${p1Result.points} | ${player2Name}: ${p2Result.points}</span>`;
+    
+    let pointsBreakdown = `<span class="points">${player1Name}: ${p1Result.points}`;
+    if (p1Result.exactBonus > 0) pointsBreakdown += ` (+${p1Result.exactBonus} exact!)`;
+    pointsBreakdown += ` | ${player2Name}: ${p2Result.points}`;
+    if (p2Result.exactBonus > 0) pointsBreakdown += ` (+${p2Result.exactBonus} exact!)`;
+    pointsBreakdown += `</span>`;
+    pointsEarned.innerHTML = pointsBreakdown;
+    
     comboDisplay.innerHTML = `<div>${player1Name} Range: ${p1High - p1Low} | ${player2Name} Range: ${p2High - p2Low}</div>`;
     
     resultArea.classList.remove('hidden');
@@ -1691,7 +1888,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.nextQuestion = function() {
+  window.nextQuestion = async function() {
     if (!gameInProgress) return;
     
     if (gameMode === 'turn-based') {
@@ -1712,7 +1909,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRound++;
     }
     
-    loadQuestion();
+    await loadQuestion(); // Wait for question loading
     updateHUD();
   };
 
@@ -1728,6 +1925,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     showFade('⏭️ Question Skipped!');
     nextQuestion();
+  };
+  
+  // Add API control functions (for debugging)
+  window.toggleAPI = function() {
+    useAPI = !useAPI;
+    console.log(`📡 API ${useAPI ? 'enabled' : 'disabled'}`);
+    showFade(`📡 API ${useAPI ? 'Enabled' : 'Disabled'}`);
+  };
+  
+  window.clearAPICache = function() {
+    apiQuestionCache = [];
+    lastAPIFetch = 0;
+    console.log('🗑️ API cache cleared');
+    showFade('🗑️ API Cache Cleared');
   };
 
   function endTwoPlayerGame() {
@@ -1859,9 +2070,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Count total questions for fallback system
   const totalQuestions = Object.values(triviaQuestions).reduce((total, difficulty) => total + difficulty.length, 0);
-  console.log(`🎮 NES Hi-Lo Trivia Game - Enhanced Edition with ${totalQuestions} questions initialized!`);
-  console.log(`📊 Question Breakdown: Easy: ${triviaQuestions.easy.length}, Medium: ${triviaQuestions.medium.length}, Hard: ${triviaQuestions.hard.length}`);
-  console.log('🎵 Music controls are visible and functional!');
+  console.log(`🎮 NES Hi-Lo Trivia Game - Enhanced Edition with EXACT MATCH BONUS!`);
+  console.log(`🎯 NEW FEATURE: +50 bonus points when your high or low guess exactly matches the answer!`);
+  console.log(`📊 Local Question Bank: ${totalQuestions} questions (Easy: ${triviaQuestions.easy.length}, Medium: ${triviaQuestions.medium.length}, Hard: ${triviaQuestions.hard.length})`);
+  console.log(`📡 API Integration: Open Trivia Database (with ${totalQuestions}-question local fallback)`);
 });
 </script>
 </body>
