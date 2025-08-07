@@ -40,10 +40,6 @@ you win by **guessing the correct number range**.
 ---
 
 ## 📸 Screenshots
-<img width="363" height="657" alt="image" src="https://github.com/user-attachments/assets/eaec3f39-6759-42b9-a910-5713dbf58223" />
-<img width="641" height="530" alt="image" src="https://github.com/user-attachments/assets/38a38020-afa8-4189-b716-1b520af4f53a" />
-
-
 
 | Lobby | Game Screen | Leaderboard |
 |-------|-------------|-------------|
