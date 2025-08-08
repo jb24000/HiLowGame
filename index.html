@@ -680,6 +680,241 @@
     .tab.active.light-mode { border-color: #FFD700; color: #FFD700; background: rgba(0,0,0,0.05); }
     .leaderboard li.light-mode { color: #495057; }
     .toggles label.light-mode { color: #495057; }
+    
+    /* Custom Number Keypad Styles */
+    .custom-numpad {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .custom-numpad.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .numpad-container {
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      border: 4px solid #FFD700;
+      border-radius: 12px;
+      padding: 20px;
+      width: 90%;
+      max-width: 320px;
+      box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        4px 4px 0px #000;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { 
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .numpad-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .numpad-title {
+      font-size: 14px;
+      color: #00ff88;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .numpad-close {
+      background: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+      transition: transform 0.1s;
+    }
+
+    .numpad-close:active {
+      transform: scale(0.95);
+    }
+
+    .numpad-display {
+      background: #000;
+      border: 2px solid #00ff88;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #00ff88;
+      text-align: right;
+      font-weight: bold;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-shadow: 0 0 5px #00ff88;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .numpad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .numpad-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      padding: 0;
+      height: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: monospace, 'Courier New', Courier;
+      box-shadow: 
+        3px 3px 0px #000,
+        inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+      transition: all 0.1s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .numpad-btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .numpad-btn:hover:before {
+      left: 100%;
+    }
+
+    .numpad-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    .numpad-btn.numpad-clear,
+    .numpad-btn.numpad-backspace {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+      font-size: 14px;
+    }
+
+    .numpad-btn.numpad-negative {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      font-size: 24px;
+    }
+
+    .numpad-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .numpad-action {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: monospace, 'Courier New', Courier;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+      box-shadow: 3px 3px 0px #000;
+    }
+
+    .numpad-cancel {
+      background: #666;
+      color: #fff;
+    }
+
+    .numpad-cancel:hover {
+      background: #555;
+    }
+
+    .numpad-confirm {
+      background: #00ff88;
+      color: #333;
+    }
+
+    .numpad-confirm:hover {
+      background: #00cc6a;
+      transform: translateY(-1px);
+      box-shadow: 4px 4px 0px #000;
+    }
+
+    .numpad-action:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Light mode styles for numpad */
+    body.light-mode .numpad-container {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e2e8f0 100%);
+      border-color: #495057;
+    }
+
+    body.light-mode .numpad-display {
+      background: #fff;
+      border-color: #495057;
+      color: #495057;
+      text-shadow: none;
+    }
+
+    body.light-mode .numpad-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: #495057;
+    }
+
+    body.light-mode .numpad-title {
+      color: #495057;
+      text-shadow: 1px 1px 0px #fff;
+    }
+
+    /* Haptic feedback animation */
+    @keyframes buttonPress {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .numpad-btn.pressed {
+      animation: buttonPress 0.15s ease-out;
+    }
 
     /* Mobile responsive */
     @media (max-width: 600px) {
@@ -724,6 +959,21 @@
       .high-score-display { font-size: 11px; }
       .combo-hud { font-size: 13px; }
       .combo-display { font-size: 15px; }
+      
+      .numpad-container {
+        width: 95%;
+        padding: 15px;
+      }
+      
+      .numpad-btn {
+        height: 45px;
+        font-size: 18px;
+      }
+      
+      .numpad-display {
+        font-size: 20px;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -783,9 +1033,9 @@
   <div class="leaderboard">
     <div class="leaderboard-title">Leaderboard</div>
     <div class="tabs">
-      <div class="tab" onclick="switchTab('easy')">Easy</div>
-      <div class="tab active" onclick="switchTab('medium')">Medium</div>
-      <div class="tab" onclick="switchTab('hard')">Hard</div>
+      <div class="tab" data-tab="easy">Easy</div>
+      <div class="tab active" data-tab="medium">Medium</div>
+      <div class="tab" data-tab="hard">Hard</div>
     </div>
     <ul id="leaderboard-list"></ul>
   </div>
@@ -813,7 +1063,7 @@
       </div>
     </div>
     
-    <button class="submit-guess" id="submit-guess" onclick="submitGuess()">Submit Guess</button>
+    <button class="submit-guess" id="submit-guess">Submit Guess</button>
   </div>
   
   <!-- Head-to-Head Input Area -->
@@ -842,7 +1092,7 @@
         </div>
       </div>
     </div>
-    <button class="submit-guess" id="submit-head-to-head" onclick="submitHeadToHead()">Both Players Submit!</button>
+    <button class="submit-guess" id="submit-head-to-head">Both Players Submit!</button>
   </div>
   
   <div class="result-area hidden" id="result-area">
@@ -853,13 +1103,43 @@
   </div>
   
   <div class="game-buttons">
-    <button onclick="nextQuestion()">Next Question</button>
-    <button onclick="skipQuestion()">Skip Question</button>
-    <button onclick="backToLobby()">🏠 Back to Lobby</button>
+    <button id="next-btn">Next Question</button>
+    <button id="skip-btn">Skip Question</button>
+    <button id="back-btn">🏠 Back to Lobby</button>
   </div>
 </div>
 
 <div class="fade-black" id="fade-black"></div>
+
+<!-- Custom Number Keypad -->
+<div id="custom-numpad" class="custom-numpad">
+  <div class="numpad-container">
+    <div class="numpad-header">
+      <span class="numpad-title">ENTER NUMBER</span>
+      <button class="numpad-close" id="numpad-close-btn">✕</button>
+    </div>
+    <div class="numpad-display" id="numpad-display">0</div>
+    <div class="numpad-grid">
+      <button class="numpad-btn" data-digit="1">1</button>
+      <button class="numpad-btn" data-digit="2">2</button>
+      <button class="numpad-btn" data-digit="3">3</button>
+      <button class="numpad-btn" data-digit="4">4</button>
+      <button class="numpad-btn" data-digit="5">5</button>
+      <button class="numpad-btn" data-digit="6">6</button>
+      <button class="numpad-btn" data-digit="7">7</button>
+      <button class="numpad-btn" data-digit="8">8</button>
+      <button class="numpad-btn" data-digit="9">9</button>
+      <button class="numpad-btn numpad-negative" data-digit="-">-</button>
+      <button class="numpad-btn" data-digit="0">0</button>
+      <button class="numpad-btn numpad-backspace" id="numpad-backspace">⌫</button>
+    </div>
+    <div class="numpad-actions">
+      <button class="numpad-action numpad-cancel" id="numpad-cancel">CANCEL</button>
+      <button class="numpad-action numpad-confirm" id="numpad-confirm">CONFIRM</button>
+    </div>
+  </div>
+</div>
+
 <audio id="win-sound" preload="auto"></audio>
 <audio id="lose-sound" preload="auto"></audio>
 
@@ -1470,17 +1750,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Leaderboard functions
-  window.switchTab = function(tab) {
+  function switchTab(tab) {
     currentLeaderboardTab = tab;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(t => {
-      if (t.textContent.toLowerCase() === tab) {
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      if (t.dataset.tab === tab) {
         t.classList.add('active');
       }
     });
     renderLeaderboard();
-  };
+  }
+
+  // Add click handlers for tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      switchTab(this.dataset.tab);
+    });
+  });
 
   function renderLeaderboard() {
     const list = document.getElementById('leaderboard-list');
@@ -1694,7 +1980,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  window.submitGuess = function() {
+  function submitGuess() {
     const lowGuess = parseInt(lowGuessInput.value);
     const highGuess = parseInt(highGuessInput.value);
     
@@ -1709,9 +1995,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     evaluateGuess(lowGuess, highGuess, 'single');
-  };
+  }
+  
+  submitButton.addEventListener('click', submitGuess);
 
-  window.submitHeadToHead = function() {
+  function submitHeadToHead() {
     const p1Low = parseInt(document.getElementById('p1-low-guess').value);
     const p1High = parseInt(document.getElementById('p1-high-guess').value);
     const p2Low = parseInt(document.getElementById('p2-low-guess').value);
@@ -1728,7 +2016,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     evaluateHeadToHead(p1Low, p1High, p2Low, p2High);
-  };
+  }
+  
+  submitHeadToHeadButton.addEventListener('click', submitHeadToHead);
 
   function evaluateGuess(lowGuess, highGuess, mode) {
     const answer = currentQuestion.answer;
@@ -1921,7 +2211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.nextQuestion = async function() {
+  async function nextQuestion() {
     if (!gameInProgress) return;
     
     if (gameMode === 'turn-based') {
@@ -1944,9 +2234,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     await loadQuestion(); // Wait for question loading
     updateHUD();
-  };
+  }
 
-  window.skipQuestion = function() {
+  function skipQuestion() {
     if (!gameInProgress) return;
     
     // Reset combo for single player when skipping
@@ -1958,7 +2248,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     showFade('⏭️ Question Skipped!');
     nextQuestion();
-  };
+  }
+  
+  document.getElementById('next-btn').addEventListener('click', nextQuestion);
+  document.getElementById('skip-btn').addEventListener('click', skipQuestion);
   
   // Add API control functions (for debugging)
   window.toggleAPI = function() {
@@ -2024,7 +2317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
 
-  window.backToLobby = function() {
+  function backToLobby() {
     // Save single player high score
     if (gameMode === 'single' && player1Score > 0) {
       if (player1Score > currentHighScore) {
@@ -2042,7 +2335,174 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Section.classList.add('hidden');
     twoPlayerOptions.classList.remove('show');
     renderLeaderboard();
-  };
+  }
+  
+  document.getElementById('back-btn').addEventListener('click', backToLobby);
+
+  // Custom Numpad Logic - ADDED FOR MOBILE
+  let currentNumpadValue = '';
+  let currentNumpadTarget = null;
+  let numpadCallback = null;
+
+  function openNumpad(targetInput, callback) {
+    const numpad = document.getElementById('custom-numpad');
+    currentNumpadTarget = targetInput;
+    numpadCallback = callback;
+    
+    // Initialize with current value or empty
+    currentNumpadValue = targetInput.value || '';
+    document.getElementById('numpad-display').textContent = currentNumpadValue || '0';
+    
+    numpad.classList.add('show');
+    
+    // Play open sound
+    createBeepSound(600, 100);
+    
+    // Add haptic feedback if available
+    if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  }
+
+  function closeNumpad() {
+    const numpad = document.getElementById('custom-numpad');
+    numpad.classList.remove('show');
+    currentNumpadTarget = null;
+    currentNumpadValue = '';
+    
+    // Play close sound
+    createBeepSound(400, 100);
+  }
+
+  function numpadInput(digit) {
+    // Handle negative numbers
+    if (digit === '-') {
+      if (currentNumpadValue.startsWith('-')) {
+        currentNumpadValue = currentNumpadValue.substring(1);
+      } else {
+        currentNumpadValue = '-' + currentNumpadValue;
+      }
+    } else {
+      // Limit to reasonable number length
+      if (currentNumpadValue.length >= 8) return;
+      
+      // Handle leading zeros
+      if (currentNumpadValue === '0' && digit !== '0') {
+        currentNumpadValue = digit;
+      } else if (currentNumpadValue === '-0' && digit !== '0') {
+        currentNumpadValue = '-' + digit;
+      } else if (currentNumpadValue !== '0' && currentNumpadValue !== '-0') {
+        currentNumpadValue += digit;
+      }
+    }
+    
+    document.getElementById('numpad-display').textContent = currentNumpadValue || '0';
+    
+    // Visual feedback
+    event.target.classList.add('pressed');
+    setTimeout(() => {
+      event.target.classList.remove('pressed');
+    }, 150);
+    
+    // Sound feedback
+    createBeepSound(700 + (parseInt(digit) * 20 || 0), 50);
+    
+    // Haptic feedback
+    if (navigator.vibrate) {
+      navigator.vibrate(5);
+    }
+  }
+
+  function numpadBackspace() {
+    if (currentNumpadValue.length > 0) {
+      currentNumpadValue = currentNumpadValue.slice(0, -1);
+      document.getElementById('numpad-display').textContent = currentNumpadValue || '0';
+    }
+    
+    createBeepSound(450, 80);
+    
+    if (navigator.vibrate) {
+      navigator.vibrate(8);
+    }
+  }
+
+  function confirmNumpad() {
+    if (currentNumpadTarget) {
+      currentNumpadTarget.value = currentNumpadValue || '0';
+      
+      // Trigger input event for any listeners
+      const event = new Event('input', { bubbles: true });
+      currentNumpadTarget.dispatchEvent(event);
+      
+      // Call callback if provided
+      if (numpadCallback) {
+        numpadCallback(currentNumpadValue || '0');
+      }
+    }
+    
+    createBeepSound(900, 150);
+    
+    if (navigator.vibrate) {
+      navigator.vibrate(20);
+    }
+    
+    closeNumpad();
+  }
+
+  // Setup numpad for mobile devices
+  function setupNumpadInputs() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      document.querySelectorAll('.guess-input').forEach(input => {
+        // Prevent default keyboard
+        input.setAttribute('readonly', 'readonly');
+        input.style.cursor = 'pointer';
+        
+        input.addEventListener('click', function(e) {
+          e.preventDefault();
+          openNumpad(this);
+        });
+        
+        input.addEventListener('focus', function(e) {
+          e.preventDefault();
+          this.blur();
+          openNumpad(this);
+        });
+      });
+    }
+  }
+  
+  setupNumpadInputs();
+  
+  // Numpad button event listeners
+  document.querySelectorAll('.numpad-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const digit = this.dataset.digit;
+      if (digit) {
+        numpadInput(digit);
+      }
+    });
+  });
+  
+  document.getElementById('numpad-backspace').addEventListener('click', numpadBackspace);
+  document.getElementById('numpad-cancel').addEventListener('click', closeNumpad);
+  document.getElementById('numpad-close-btn').addEventListener('click', closeNumpad);
+  document.getElementById('numpad-confirm').addEventListener('click', confirmNumpad);
+  
+  // Close numpad on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeNumpad();
+    }
+  });
+  
+  // Close numpad when clicking outside
+  document.getElementById('custom-numpad').addEventListener('click', (e) => {
+    if (e.target.id === 'custom-numpad') {
+      closeNumpad();
+    }
+  });
 
   // Input validation for all number inputs
   document.querySelectorAll('.guess-input').forEach(input => {
@@ -2117,6 +2577,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalQuestions = Object.values(triviaQuestions).reduce((total, difficulty) => total + difficulty.length, 0);
   console.log(`🎮 NES Hi-Lo Trivia Game - Enhanced Edition with EXACT MATCH BONUS!`);
   console.log(`🎯 NEW FEATURE: +50 bonus points when your high or low guess exactly matches the answer!`);
+  console.log(`📱 CUSTOM NUMPAD: Enabled for mobile devices!`);
   console.log(`🚫 DUPLICATE PREVENTION: No repeated questions within the same game session!`);
   console.log(`📊 Local Question Bank: ${totalQuestions} questions (Easy: ${triviaQuestions.easy.length}, Medium: ${triviaQuestions.medium.length}, Hard: ${triviaQuestions.hard.length})`);
   console.log(`📡 API Integration: Open Trivia Database (with ${totalQuestions}-question local fallback)`);
