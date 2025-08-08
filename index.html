@@ -2374,7 +2374,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createBeepSound(400, 100);
   }
 
-  function numpadInput(digit) {
+function numpadInput(digit, event) {
     // Handle negative numbers
     if (digit === '-') {
       if (currentNumpadValue.startsWith('-')) {
@@ -2399,19 +2399,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('numpad-display').textContent = currentNumpadValue || '0';
     
     // Visual feedback
-    event.target.classList.add('pressed');
-    setTimeout(() => {
-      event.target.classList.remove('pressed');
-    }, 150);
+    if (event && event.target) {
+        event.target.classList.add('pressed');
+        setTimeout(() => {
+            event.target.classList.remove('pressed');
+        }, 150);
+    }
     
-    // Sound feedback
-    createBeepSound(700 + (parseInt(digit) * 20 || 0), 50);
+    // Sound feedback - THIS IS THE FIXED LINE
+ createBeepSound(700 + (parseInt(digit) * 20 || 0), 50);
     
     // Haptic feedback
     if (navigator.vibrate) {
       navigator.vibrate(5);
     }
-  }
+}
 
   function numpadBackspace() {
     if (currentNumpadValue.length > 0) {
@@ -2477,10 +2479,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Numpad button event listeners
   document.querySelectorAll('.numpad-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
       const digit = this.dataset.digit;
       if (digit) {
-        numpadInput(digit);
+        numpadInput(digit, e);
       }
     });
   });
@@ -2563,11 +2565,14 @@ document.addEventListener('DOMContentLoaded', () => {
       
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + (duration || 200) / 1000);
+	setTimeout(() => {
+    audioContext.close();
+}, duration + 100); 
     } catch (e) {
       console.log('Audio context not available, silent mode');
     }
   }
-
+  
   // Initialize
   renderLeaderboard();
   const currentTheme = (typeof(Storage) !== "undefined" && localStorage) ? localStorage.getItem('theme') : 'dark';
